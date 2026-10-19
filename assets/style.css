@@ -131,3 +131,4 @@ th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{co
 .slider::-moz-range-track{height:6px;border-radius:3px;background:#262b2e}
 .slider::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-12px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--accent);cursor:pointer}
 .slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);cursor:pointer}
+input.slider{border:0 !important;background:transparent !important;padding:0 !important;min-height:0 !important;box-shadow:none !important;width:auto}
