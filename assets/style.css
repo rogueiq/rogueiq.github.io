@@ -71,7 +71,7 @@ th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{co
 .hook .muted{font-size:14px}
 .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:12px 22px;line-height:1.25;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 30px -10px var(--accent)}
 .btn:hover{filter:brightness(1.1)}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid #3a3a3a;box-shadow:none}.btn.ghost:hover{border-color:var(--accent)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #2c3236;box-shadow:none}.btn.ghost:hover{border-color:var(--accent)}
 .news{border-color:var(--line);background:linear-gradient(180deg,var(--accent-soft),transparent 70%),var(--card)}
 .news h2{font-size:19px}
 .intro{color:var(--soft-text);margin:0 0 16px;max-width:52ch}
@@ -80,7 +80,7 @@ th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{co
 .charts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:18px}
 @media(min-width:640px){.charts{grid-template-columns:1fr 1fr}}
 .chart figure{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);height:100%}
-.chart img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;background:#111}
+.chart img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--card)}
 .chart figcaption{padding:12px 14px 14px}.chart h3{font-size:15.5px;line-height:1.35}
 .chart .src{font-size:13px;color:var(--muted);margin:6px 0 2px}.chart .src span{color:var(--text);font-weight:600;margin-right:4px}
 .chart .src a{color:var(--muted);text-decoration-color:var(--accent);text-underline-offset:2px}.chart .muted{font-size:12.5px;margin:0}
