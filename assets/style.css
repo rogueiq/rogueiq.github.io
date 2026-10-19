@@ -1,11 +1,14 @@
 :root{
-  /* Brand tokens. Swap the accent here; everything else follows. Lead: Volt Violet. */
-  --accent:#7C3AED;          /* Volt Violet */
-  --accent-2:#3B82F6;        /* electric blue, used only in the shimmer */
-  --accent-ink:#fff;         /* text on accent buttons */
-  --accent-soft:rgba(124,58,237,.14);
-  --shimmer:linear-gradient(100deg,var(--text) 0%,var(--text) 38%,#c4b5fd 48%,var(--accent-2) 54%,var(--text) 64%,var(--text) 100%);
-  --bg:#000;--text:#fff;--muted:#a3a3a3;--line:#222;--card:#0a0a0a;
+  /* Brand tokens: Cyan + Ember (locked by Alan, Oct 19 2026). */
+  --accent:#22E6D0;          /* acid cyan: links, wordmark IQ, primary buttons */
+  --accent-deep:#0EA5A4;     /* deep cyan */
+  --accent-ink:#07090A;      /* text on cyan/ember buttons */
+  --accent-soft:rgba(34,230,208,.08);
+  --gradient:linear-gradient(90deg,var(--accent-deep),var(--accent)); /* sparingly: hero + chart lines only */
+  --shimmer:linear-gradient(100deg,var(--text) 0%,var(--text) 38%,var(--accent-deep) 48%,var(--accent) 54%,var(--text) 64%,var(--text) 100%);
+  --ember:#FF7A1A;           /* ONE highlight per view: the newsletter button. Never a large fill. */
+  --chart-up:#E6E6E6;--chart-down:#6B6B6B; /* direction colors; never brand colors */
+  --bg:#07090A;--text:#F5EFE6;--muted:#9A948C;--line:#1f2326;--card:#0d1012;--soft-text:#d6d0c7;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -16,7 +19,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--accent);color:var(--accent-ink);padding:8px 12px;border-radius:8px;z-index:9}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .muted{color:var(--muted)}
-.nav{position:sticky;top:0;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5}
+.nav{position:sticky;top:0;background:rgba(7,9,10,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
 .logo{font-weight:700;text-decoration:none;letter-spacing:-.01em}.logo span,h1 span{color:var(--accent)}
 nav a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:18px}nav a:hover{color:var(--text)}
@@ -43,7 +46,7 @@ a.row:hover h3{color:var(--accent)}
 .news{border:1px solid var(--line);border-radius:18px;padding:28px;background:var(--card)}
 .news h2{color:var(--text);font-size:22px;text-transform:none;letter-spacing:-.01em;margin-bottom:4px}
 .signup{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.signup input{flex:1 1 200px;min-height:46px;background:#000;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:0 14px;font:inherit}
+.signup input{flex:1 1 200px;min-height:46px;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--text);padding:0 14px;font:inherit}
 .signup button{min-height:46px;padding:0 20px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;cursor:pointer}
 .signup .note{flex-basis:100%;margin:0;font-size:14px}
 .foot{border-top:1px solid var(--line);padding-top:24px;padding-bottom:40px;font-size:14px;color:var(--muted)}
@@ -63,15 +66,15 @@ th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{co
 .shimmer{background:var(--shimmer);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s ease-in-out infinite}
 @keyframes shimmer{0%{background-position:100% 0}60%,100%{background-position:0 0}}
 @media (prefers-reduced-motion:reduce){.shimmer{animation:none;background-position:50% 0}}
-.hero .lead{max-width:38ch;font-size:19px;color:#cfcfcf}
+.hero .lead{max-width:38ch;font-size:19px;color:var(--soft-text)}
 .hook{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:26px 0 30px}
 .hook .muted{font-size:14px}
 .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:12px 22px;line-height:1.25;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 30px -10px var(--accent)}
 .btn:hover{filter:brightness(1.1)}
 .btn.ghost{background:transparent;color:var(--text);border:1px solid #3a3a3a;box-shadow:none}.btn.ghost:hover{border-color:var(--accent)}
-.news{border-color:#2a2140;background:linear-gradient(180deg,var(--accent-soft),transparent 70%),var(--card)}
+.news{border-color:var(--line);background:linear-gradient(180deg,var(--accent-soft),transparent 70%),var(--card)}
 .news h2{font-size:19px}
-.intro{color:#cfcfcf;margin:0 0 16px;max-width:52ch}
+.intro{color:var(--soft-text);margin:0 0 16px;max-width:52ch}
 .more{margin:14px 0 0;font-size:15px}.more a{color:var(--text);text-decoration-color:var(--accent);text-underline-offset:3px}
 .empty{padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0}
 .charts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:18px}
@@ -83,5 +86,38 @@ th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{co
 .chart .src a{color:var(--muted);text-decoration-color:var(--accent);text-underline-offset:2px}.chart .muted{font-size:12.5px;margin:0}
 .dot{display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--accent-ink)}
 .waitlist{border:1px solid var(--line);border-radius:18px;padding:26px}
-.waitlist h2{color:var(--text);font-size:19px;text-transform:none;letter-spacing:-.01em}.waitlist p{color:#cfcfcf;margin:0 0 14px}
+.waitlist h2{color:var(--text);font-size:19px;text-transform:none;letter-spacing:-.01em}.waitlist p{color:var(--soft-text);margin:0 0 14px}
 .foot .disc{color:var(--muted);font-size:14px;max-width:60ch}
+
+/* ---- home v4 ---- */
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 26px}
+.big{font-size:clamp(24px,5.4vw,32px);font-weight:700;letter-spacing:-.025em;line-height:1.15;margin:0 0 10px;color:var(--text)}
+.kicker{color:var(--accent);font-weight:600;margin:0 0 8px}
+.small{font-size:13px}
+.mini{border:1px solid var(--line);border-radius:18px;padding:22px;background:linear-gradient(180deg,var(--accent-soft),transparent 75%),var(--card)}
+.mini .mini-h{color:var(--text);font-size:19px;text-transform:none;letter-spacing:-.01em;margin:0 0 14px}
+.mini-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.mini-form label{flex:1 1 130px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+.mini-form input{min-height:46px;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--text);padding:0 14px;font:inherit;font-size:17px}
+.mini-form button{flex:1 1 100%;min-height:46px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;cursor:pointer}
+@media(min-width:560px){.mini-form button{flex:0 0 auto;padding:0 24px}}
+.mini-err{color:#fca5a5;font-size:14px;margin:10px 0 0}
+.mini-result{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.mini-result p{margin:0 0 6px}.mr-head{font-size:22px;font-weight:700;color:var(--accent)}.mr-detail{color:var(--soft-text)}
+.mini-result a{color:var(--text);text-decoration-color:var(--accent);text-underline-offset:3px}
+.mini-note{font-size:13px;margin:12px 0 0}
+.cards{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+@media(min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+.card{display:block;height:100%;border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--card);text-decoration:none;color:var(--text)}
+.card:hover{border-color:var(--accent)}.card p{margin:6px 0 0;color:var(--soft-text);font-size:15px}
+.card .badge{float:right;margin-left:8px}.card .preview{color:var(--accent);font-weight:500}.card .go{display:inline-block;margin-top:10px;color:var(--accent);font-weight:600;font-size:15px}
+.agents{border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--card)}
+.code{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;overflow-x:auto;font-size:13.5px;margin:0}
+.chart .take{color:var(--text);font-size:15px;margin:6px 0 0}.chart .cnote{color:var(--muted);font-size:13px;margin:6px 0 0}
+
+/* ---- Cyan + Ember ---- */
+.btn{box-shadow:0 0 0 1px rgba(255,255,255,.05),0 8px 26px -14px var(--accent)}
+.badge.live{color:var(--accent-ink)}
+.news .signup button{background:var(--ember);color:var(--accent-ink)}  /* the single ember highlight */
+.mini-form button{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.hero{background:radial-gradient(60% 40% at 0% 0%,rgba(14,165,164,.10),transparent 70%)}

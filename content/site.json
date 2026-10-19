@@ -1,33 +1,151 @@
 {
   "name": "RogueIQ",
   "url": "https://rogueiq.com",
-  "tagline": "Money tools that show their work.",
-  "tagline_backup": "Finance, with receipts.",
-  "subline": "Simple personal finance and investing tools, plus plain-language explainers built on primary-source public data, so you can check the numbers and make your own calls. Built in public by a small team with AI agents.",
-  "description": "RogueIQ makes simple personal finance and investing tools and plain-language guides built on primary-source public data, so you can check the numbers yourself. Calculators and organizers for education.",
-  "disclaimer": "RogueIQ offers education, calculators and organizers. Nothing here is personalized financial advice. Check the sources and make your own decisions.",
+  "tagline": "Smarter about money. For you and your AI.",
+  "tagline_backup": "We make humans and AI agents smarter about money.",
+  "subline": "Free money tools you can play with in seconds, built on public data you can check. Your agent can plug into every one.",
+  "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.",
+  "disclaimer": "RogueIQ builds education and tools, not personalized financial advice.",
   "x": "https://x.com/rogueiq",
   "github": "https://github.com/rogueiq",
-  "hook": {"label": "Try the Net Worth by Age Checker", "url": "https://rogueiq.github.io/networth-by-age/",
-           "note": "Free, runs in your browser. Federal Reserve survey data."},
-  "waitlist": {"title": "Investor circle", "text": "A members' community and app for people who like to check the numbers themselves. It isn't open yet. Join the waitlist and we'll email you first when it opens.",
-               "url": "mailto:hello@rogueiq.com?subject=Investor%20circle%20waitlist&body=Please%20add%20me%20to%20the%20RogueIQ%20investor%20circle%20waitlist.", "button": "Join the waitlist"},
+  "hook": {
+    "label": "How does your net worth compare at your age?",
+    "url": "https://rogueiq.github.io/networth-by-age/",
+    "note": "Free and private. Runs in your browser on Federal Reserve survey data."
+  },
+  "waitlist": {
+    "title": "Investor circle",
+    "text": "For serious long-term investors: early access to new tools and a private room to compare notes. Join the waitlist.",
+    "url": "mailto:hello@rogueiq.com?subject=Investor%20circle%20waitlist&body=Please%20add%20me%20to%20the%20RogueIQ%20investor%20circle%20waitlist.",
+    "button": "Join the waitlist"
+  },
   "tools": [
-    {"name": "Net Worth by Age Checker", "status": "Live", "url": "https://rogueiq.github.io/networth-by-age/",
-     "summary": "See how your net worth compares with US families your age, using the Federal Reserve's 2025 Survey of Consumer Finances."}
+    {
+      "name": "Net Worth by Age Checker",
+      "question": "How does my net worth compare at my age?",
+      "status": "Live",
+      "url": "https://rogueiq.github.io/networth-by-age/",
+      "api": "https://rogueiq-tools.rogueiq.workers.dev/v1/networth-by-age",
+      "preview": "Age 34 with $150K: higher than about 75% of families under 35.",
+      "summary": "See how your net worth compares with US families your age, using the Federal Reserve's 2025 Survey of Consumer Finances."
+    }
   ],
   "charts": [
-    {"title": "Companies now spend more of the economy on tech than at the dot-com peak", "date": "2026-10-19", "img": "/assets/charts/ai-capex-gdp.png",
-     "alt": "Line chart of business spending on information processing equipment and software as a share of US GDP since 1947, reaching a record in Q2 2026 above the Q4 2000 dot-com peak.",
-     "sources": [{"label": "BEA via FRED: A679RC1Q027SBEA", "url": "https://fred.stlouisfed.org/series/A679RC1Q027SBEA"}, {"label": "BEA via FRED: GDP", "url": "https://fred.stlouisfed.org/series/GDP"}]},
-    {"title": "$MSTR and Metaplanet could be cut from MSCI indexes", "date": "2026-10-16", "img": "/assets/charts/msci-btc.png",
-     "alt": "Chart comparing how much of Strategy's and Metaplanet's assets are bitcoin, with Strategy at about 94.5 percent and Metaplanet at about 97.9 percent.",
-     "sources": [{"label": "Strategy Q2 2026 10-Q", "url": ""}, {"label": "Metaplanet 1H 2026 results", "url": ""}, {"label": "MSCI", "url": ""}]},
-    {"title": "Last week: the pros sold. The crowd bought 3x.", "date": "2026-10-19", "img": "/assets/charts/pros-vs-crowd.png",
-     "alt": "Chart contrasting hedge fund selling in Goldman's prime book with record retail inflows into the 3x leveraged semiconductor fund SOXL.",
-     "sources": [{"label": "Goldman prime book via Investing.com", "url": ""}, {"label": "SOXL inflows, Investing.com", "url": ""}, {"label": "Korean retail flows, SEIBro", "url": ""}]},
-    {"title": "How a 3x fund loses on a round trip", "date": "2026-10-19", "img": "/assets/charts/leveraged-decay.png",
-     "alt": "Chart showing how a daily-reset 3x leveraged fund can end below its starting value after the underlying index goes down and back up.",
-     "sources": [{"label": "Direxion SOXL fund page (daily reset)", "url": ""}, {"label": "Yahoo Finance SOXL closes", "url": ""}]}
-  ]
+    {
+      "title": "Companies now spend more of the economy on tech than at the dot-com peak",
+      "date": "2026-10-19",
+      "img": "/assets/charts/ai-capex-gdp-cyan.png",
+      "alt": "Line chart of business spending on information processing equipment and software as a share of US GDP since 1947, reaching a record in Q2 2026 above the Q4 2000 dot-com peak.",
+      "sources": [
+        {
+          "label": "BEA via FRED: A679RC1Q027SBEA",
+          "url": "https://fred.stlouisfed.org/series/A679RC1Q027SBEA"
+        },
+        {
+          "label": "BEA via FRED: GDP",
+          "url": "https://fred.stlouisfed.org/series/GDP"
+        }
+      ],
+      "takeaway": "Companies now spend a bigger share of the economy on tech than at the dot-com peak.",
+      "home": true,
+      "note": "Business spending on computers and software hit 5.05% of GDP in Q2 2026, above the 4.46% dot-com peak in Q4 2000.",
+      "id": "ai-capex-gdp"
+    },
+    {
+      "title": "How a 3x fund loses on a round trip",
+      "date": "2026-10-19",
+      "img": "/assets/charts/leveraged-decay.png",
+      "alt": "Chart showing how a daily-reset 3x leveraged fund can end below its starting value after the underlying index goes down and back up.",
+      "sources": [
+        {
+          "label": "Direxion SOXL fund page (daily reset)",
+          "url": ""
+        },
+        {
+          "label": "Yahoo Finance SOXL closes",
+          "url": ""
+        }
+      ],
+      "takeaway": "If the index drops 10% and recovers, a 3x fund is still down about 7%.",
+      "home": true,
+      "note": "Hypothetical two-day example with a daily 3x reset, before fees: $100 becomes $93.33.",
+      "id": "leveraged-decay"
+    },
+    {
+      "title": "Last week: the pros sold. The crowd bought 3x.",
+      "date": "2026-10-19",
+      "img": "/assets/charts/pros-vs-crowd.png",
+      "alt": "Chart contrasting hedge fund selling in Goldman's prime book with record retail inflows into the 3x leveraged semiconductor fund SOXL.",
+      "sources": [
+        {
+          "label": "Goldman prime book via Investing.com",
+          "url": ""
+        },
+        {
+          "label": "SOXL inflows, Investing.com",
+          "url": ""
+        },
+        {
+          "label": "Korean retail flows, SEIBro",
+          "url": ""
+        }
+      ],
+      "takeaway": "Last week hedge funds sold while retail investors poured a record $7B+ into SOXL, a 3x leveraged chip fund.",
+      "home": false,
+      "note": "",
+      "id": "pros-vs-crowd"
+    },
+    {
+      "title": "$MSTR and Metaplanet could be cut from MSCI indexes",
+      "date": "2026-10-16",
+      "img": "/assets/charts/msci-btc.png",
+      "alt": "Chart comparing how much of Strategy's and Metaplanet's assets are bitcoin, with Strategy at about 94.5 percent and Metaplanet at about 97.9 percent.",
+      "sources": [
+        {
+          "label": "Strategy Q2 2026 10-Q",
+          "url": ""
+        },
+        {
+          "label": "Metaplanet 1H 2026 results",
+          "url": ""
+        },
+        {
+          "label": "MSCI",
+          "url": ""
+        }
+      ],
+      "takeaway": "Bitcoin makes up about 94.5% of Strategy's assets and about 97.9% of Metaplanet's, which is why MSCI is weighing whether they still count as operating companies.",
+      "home": false,
+      "note": "",
+      "id": "msci-btc"
+    }
+  ],
+  "agents": {
+    "docs": "https://rogueiq-tools.rogueiq.workers.dev/docs",
+    "mcp_docs": "https://rogueiq-tools.rogueiq.workers.dev/docs#mcp",
+    "mcp": "https://rogueiq-tools.rogueiq.workers.dev/mcp",
+    "llms": "https://rogueiq-tools.rogueiq.workers.dev/llms.txt",
+    "openapi": "https://rogueiq-tools.rogueiq.workers.dev/openapi.json",
+    "skill": "https://rogueiq-tools.rogueiq.workers.dev/SKILL.md"
+  },
+  "start": {
+    "title": "Start here",
+    "intro": "New to money numbers? Start with the question almost everyone asks.",
+    "cards": [
+      {
+        "q": "How much should I have saved by now?",
+        "a": "See what families your age actually have, from the Federal Reserve's 2025 survey.",
+        "url": "https://rogueiq.github.io/networth-by-age/"
+      }
+    ]
+  },
+  "newsletter": {
+    "title": "One new tool and one chart that matters, every week.",
+    "button": "Get it free"
+  },
+  "live_data": {
+    "title": "Fresh data, ready to use.",
+    "kicker": "Finance, with receipts.",
+    "text": "Charts from primary sources like the Fed, BLS, SEC, and markets, with a plain-English line on what each means. Every chart shows its source."
+  }
 }
