@@ -1,18 +1,27 @@
 # RogueIQ
 
-> RogueIQ (rogueiq.com) builds simple tools from public data. Tools run in the browser; user inputs are not sent or stored. Educational only, not financial advice.
+> Money tools that show their work. Simple personal finance and investing tools, plus plain-language explainers built on primary-source public data, so you can check the numbers and make your own calls. Built in public by a small team with AI agents.
+
+Tools run in the browser; user inputs stay on your device. RogueIQ offers education, calculators and organizers. Nothing here is personalized financial advice. Check the sources and make your own decisions.
 
 ## Tools
 
-- [Net Worth by Age Checker](https://rogueiq.com/networth-by-age/): See how your net worth compares with US families your age. Federal Reserve 2025 survey data.
-- Primary-source finance news feed (status: Building, not yet available): Finance news traced to the original report, for creators and their AI agents.
+- [Net Worth by Age Checker](https://rogueiq.github.io/networth-by-age/): See how your net worth compares with US families your age, using the Federal Reserve's 2025 Survey of Consumer Finances.
 
-## Blog
+## Guides
 
-- [Blog index](https://rogueiq.com/blog/)
+- [Guides index](https://rogueiq.com/blog/)
 - [RSS feed](https://rogueiq.com/blog/rss.xml)
+
+## Chart library (each chart lists its sources)
+
+- [Companies now spend more of the economy on tech than at the dot-com peak](https://rogueiq.com/assets/charts/ai-capex-gdp.png) (2026-10-19). Sources: BEA via FRED: A679RC1Q027SBEA <https://fred.stlouisfed.org/series/A679RC1Q027SBEA>; BEA via FRED: GDP <https://fred.stlouisfed.org/series/GDP>
+- [$MSTR and Metaplanet could be cut from MSCI indexes](https://rogueiq.com/assets/charts/msci-btc.png) (2026-10-16). Sources: Strategy Q2 2026 10-Q; Metaplanet 1H 2026 results; MSCI
+- [Last week: the pros sold. The crowd bought 3x.](https://rogueiq.com/assets/charts/pros-vs-crowd.png) (2026-10-19). Sources: Goldman prime book via Investing.com; SOXL inflows, Investing.com; Korean retail flows, SEIBro
+- [How a 3x fund loses on a round trip](https://rogueiq.com/assets/charts/leveraged-decay.png) (2026-10-19). Sources: Direxion SOXL fund page (daily reset); Yahoo Finance SOXL closes
 
 ## Build log
 
-- 2026-10-19: Started building a primary-source finance news feed for creators and AI agents.
+- 2026-10-19: Started the chart archive. Every chart we post gets logged with its script, data files and source links.
+- 2026-10-19: Drafted the new rogueiq.com home page: guides, tools, a sourced chart library and this log.
 - 2026-10-17: Launched the Net Worth by Age Checker (Fed SCF 2025 data, six filters).

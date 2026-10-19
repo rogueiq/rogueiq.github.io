@@ -83,10 +83,10 @@ for p in sorted((C / "timeline").glob("*.md")):
 timeline.sort(key=lambda x: x["date"], reverse=True)
 
 # ---------- page shell ----------
-ORG = {"@type": "Organization", "@id": BASE + "/#org", "name": SITE["name"], "url": BASE + "/",
+ORG = {"@type": "Organization", "@id": BASE + "/#org", "name": SITE["name"], "url": BASE + "/", "slogan": SITE["tagline"], "description": SITE["description"],
        "sameAs": [SITE["x"], SITE["github"]]}
 
-def page(path, title, desc, body, jsonld, og_type="website", noindex=False):
+def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_image=None):
     url = BASE + path
     ld = json.dumps({"@context": "https://schema.org", "@graph": jsonld}, ensure_ascii=False)
     robots = '<meta name="robots" content="noindex">\n' if noindex else ""
@@ -103,11 +103,12 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="{'summary_large_image' if og_image else 'summary'}">
+{f'<meta property="og:image" content="{BASE}{og_image}">' if og_image else ''}
 <meta name="twitter:site" content="@rogueiq">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0b0614">
 <link rel="alternate" type="application/rss+xml" title="RogueIQ blog" href="/blog/rss.xml">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%2300e676%22/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%237C3AED%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -118,13 +119,13 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False):
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="/">Rogue<span>IQ</span></a>
-  <nav aria-label="Main"><a href="/#tools">Tools</a><a href="/#log">Log</a><a href="/blog/">Blog</a><a class="tag" href="{SITE['x']}">@rogueiq</a></nav>
+  <nav aria-label="Main"><a href="/#start">Guides</a><a href="/#tools">Tools</a><a href="/#charts">Charts</a><a class="tag" href="/#newsletter">Subscribe</a></nav>
 </div></header>
 <main id="main" class="wrap">
 {body}
 </main>
 <footer class="wrap foot">
-  <p>Educational tools only, not financial advice.</p>
+  <p class="disc">{esc(SITE['disclaimer'])}</p>
   <p><a href="{SITE['x']}">@rogueiq</a> · <a href="/blog/rss.xml">RSS</a> · <a href="/llms.txt">llms.txt</a></p>
 </footer>
 </body>
@@ -149,10 +150,10 @@ def log_html(e):
     return (f'<li class="entry"><div class="who"><span class="dot" aria-hidden="true"></span><strong>RogueIQ</strong>'
             f'<span class="muted">@rogueiq · <time datetime="{e["date"]}">{nice(e["date"])}</time></span></div><p>{text}</p></li>')
 
-# NEWSLETTER: see README "How to paste the beehiiv form".
-NEWSLETTER = """<section class="news" id="newsletter" aria-labelledby="nl-h">
-  <h2 id="nl-h">Follow the build</h2>
-  <p class="muted">New tools and posts, by email. No spam.</p>
+# NEWSLETTER: see README "How to paste the beehiiv form". This is the main call to action (hero).
+NEWSLETTER = """<div class="news" id="newsletter">
+  <h2 id="nl-h">Get new tools and guides by email</h2>
+  <p class="muted">One short email when we ship something. Unsubscribe any time.</p>
   <!-- ===== BEEHIIV EMBED GOES HERE =====
        1. In beehiiv: Grow > Subscribe Forms > pick a form > Get embed code.
        2. Delete everything between BEEHIIV-PLACEHOLDER-START and BEEHIIV-PLACEHOLDER-END below.
@@ -163,29 +164,68 @@ NEWSLETTER = """<section class="news" id="newsletter" aria-labelledby="nl-h">
     <label class="sr" for="nl-email">Email address</label>
     <input id="nl-email" type="email" placeholder="you@email.com" autocomplete="email" disabled>
     <button type="submit">Coming soon</button>
-    <p class="note muted" hidden>The newsletter isn't open yet.</p>
+    <p class="note muted" hidden>The newsletter opens soon.</p>
   </form>
   <!-- BEEHIIV-PLACEHOLDER-END -->
-</section>"""
+</div>"""
 
+def tool_html(t):
+    live = t["status"] == "Live"
+    badge = f'<span class="badge {"live" if live else "soon"}">{esc(t["status"])}</span>'
+    inner = f'<div><h3>{esc(t["name"])}</h3><p>{esc(t["summary"])}</p></div>{badge}'
+    return f'<li><a class="row" href="{esc(t["url"])}">{inner}</a></li>' if t["url"] else f'<li><div class="row">{inner}</div></li>'
+
+def log_html(e):
+    text = esc(e["text"])
+    if e["link"]: text = f'<a href="{esc(e["link"])}">{text}</a>'
+    return (f'<li class="entry"><div class="who"><span class="dot" aria-hidden="true">R</span><strong>RogueIQ</strong>'
+            f'<span class="muted">@rogueiq · <time datetime="{e["date"]}">{nice(e["date"])}</time></span></div><p>{text}</p></li>')
+
+def chart_html(c):
+    srcs = " · ".join(f'<a href="{esc(x["url"])}">{esc(x["label"])}</a>' if x.get("url") else esc(x["label"]) for x in c["sources"])
+    return (f'<li class="chart"><figure><img src="{esc(c["img"])}" alt="{esc(c["alt"])}" loading="lazy" decoding="async">'
+            f'<figcaption><h3>{esc(c["title"])}</h3><p class="src"><span>Sources</span> {srcs}</p>'
+            f'<p class="muted"><time datetime="{c["date"]}">{nice(c["date"])}</time></p></figcaption></figure></li>')
+
+guides = "".join(f'<li><a class="row" href="/blog/{p["slug"]}/"><div><h3>{esc(p["title"])}{" <span class=\"badge soon\">Draft</span>" if p["draft"] else ""}</h3><p>{esc(p["desc"])}</p></div></a></li>' for p in posts[:4])
+hook = SITE["hook"]; wl = SITE["waitlist"]
 home_body = f"""<section class="hero">
-  <h1>Rogue<span>IQ</span></h1>
-  <p class="lead">{esc(SITE['tagline'])}</p>
+  <h1 class="shimmer">{esc(SITE['tagline'])}</h1>
+  <p class="lead">{esc(SITE['subline'])}</p>
+  <p class="hook"><a class="btn" href="{esc(hook['url'])}">{esc(hook['label'])}&nbsp;→</a><span class="muted">{esc(hook['note'])}</span></p>
+  {NEWSLETTER}
 </section>
-<section id="tools" aria-labelledby="tools-h"><h2 id="tools-h">Tools</h2><ul class="list">{''.join(tool_html(t) for t in SITE['tools'])}</ul></section>
-<section id="log" aria-labelledby="log-h"><h2 id="log-h">Build log</h2><ol class="timeline">{''.join(log_html(e) for e in timeline)}</ol></section>
-{"<section aria-labelledby='bl-h'><h2 id='bl-h'>From the blog</h2><ul class='list posts'>" + ''.join(f'<li><a class="row" href="/blog/{p["slug"]}/"><div><h3>{esc(p["title"])}</h3><p><time datetime="{p["date"]}">{nice(p["date"])}</time></p></div></a></li>' for p in posts[:3]) + "</ul></section>" if posts else ""}
-{NEWSLETTER}"""
-write("index.html", page("/", "RogueIQ | Simple tools built on public data", SITE["description"], home_body,
-      [ORG, {"@type": "WebSite", "@id": BASE + "/#site", "name": "RogueIQ", "url": BASE + "/", "publisher": {"@id": BASE + "/#org"}}]))
+<section id="start" aria-labelledby="start-h"><h2 id="start-h">Start here</h2>
+  <p class="intro">Beginner guides that explain the numbers behind money headlines in plain language, with every source linked.</p>
+  {f'<ul class="list posts">{guides}</ul>' if guides else '<p class="muted empty">The first guides are on the way. Subscribe above to get them by email.</p>'}
+  <p class="more"><a href="/blog/">All guides →</a></p>
+</section>
+<section id="tools" aria-labelledby="tools-h"><h2 id="tools-h">What we build</h2>
+  <p class="intro">Calculators and organizers that run on public data. You bring the questions, the tools show the math.</p>
+  <ul class="list">{''.join(tool_html(t) for t in SITE['tools'])}</ul></section>
+<section id="charts" aria-labelledby="charts-h"><h2 id="charts-h">Verify, don't blindly trust</h2>
+  <p class="intro">Our chart library. Every chart lists where its data came from, so you can check it yourself.</p>
+  {f'<ul class="charts">{"".join(chart_html(c) for c in SITE.get("charts", []))}</ul>' if SITE.get("charts") else '<p class="muted empty">The chart library is coming soon.</p>'}
+</section>
+<section id="log" aria-labelledby="log-h"><h2 id="log-h">Build log</h2>
+  <p class="intro">What we worked on, in order. Built in public.</p>
+  <ol class="timeline">{''.join(log_html(e) for e in timeline)}</ol></section>
+<section class="waitlist" id="waitlist" aria-labelledby="wl-h"><h2 id="wl-h">{esc(wl['title'])}</h2>
+  <p>{esc(wl['text'])}</p><p><a class="btn ghost" href="{esc(wl['url'])}">{esc(wl['button'])}</a></p></section>"""
+write("index.html", page("/", f"RogueIQ | {SITE['tagline']}", SITE["description"], home_body,
+      [ORG, {"@type": "WebSite", "@id": BASE + "/#site", "name": "RogueIQ", "url": BASE + "/", "description": SITE["description"], "publisher": {"@id": BASE + "/#org"}},
+       *[{"@type": "WebApplication", "name": t["name"], "url": t["url"], "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "isAccessibleForFree": True, "description": t["summary"], "publisher": {"@id": BASE + "/#org"}} for t in SITE["tools"] if t["url"]],
+       *[{"@type": "ImageObject", "name": c["title"], "contentUrl": BASE + c["img"], "description": c["alt"], "datePublished": c["date"], "creator": {"@id": BASE + "/#org"},
+          "isBasedOn": [x["url"] for x in c["sources"] if x.get("url")] or None, "citation": [x["label"] for x in c["sources"]]} for c in SITE.get("charts", [])]],
+      og_image=SITE["charts"][0]["img"] if SITE.get("charts") else None))
 
 # ---------- blog ----------
 shutil.rmtree(ROOT / "blog", ignore_errors=True)
 def post_item(p):
     d = ' <span class="badge soon">Draft</span>' if p["draft"] else ""
     return f'<li><a class="row" href="/blog/{p["slug"]}/"><div><h3>{esc(p["title"])}{d}</h3><p>{esc(p["desc"])}</p><p class="muted"><time datetime="{p["date"]}">{nice(p["date"])}</time></p></div></a></li>'
-blog_body = f'<section class="hero small"><h1>Blog</h1><p class="lead">How our tools work, and what we learn building them.</p></section><ul class="list posts">{"".join(post_item(p) for p in posts) or "<li class=muted>First posts coming soon.</li>"}</ul>'
-write("blog/index.html", page("/blog/", "Blog | RogueIQ", "Notes from RogueIQ on how our data tools work and what we're building.", blog_body,
+blog_body = f'<section class="hero small"><h1>Guides</h1><p class="lead">Plain-language explainers built on primary-source public data, with every source linked.</p></section><ul class="list posts">{"".join(post_item(p) for p in posts) or "<li class=muted>First posts coming soon.</li>"}</ul>'
+write("blog/index.html", page("/blog/", "Guides | RogueIQ", "Plain-language RogueIQ guides to the numbers behind money headlines, built on primary-source public data.", blog_body,
       [ORG, {"@type": "Blog", "name": "RogueIQ Blog", "url": BASE + "/blog/", "publisher": {"@id": BASE + "/#org"}}]))
 for p in posts:
     url = f"/blog/{p['slug']}/"
@@ -199,18 +239,21 @@ for p in posts:
 # ---------- RSS, sitemap, robots, llms ----------
 def rfc822(d): return datetime.strptime(d, "%Y-%m-%d").strftime("%a, %d %b %Y 12:00:00 +0000")
 items = "".join(f"<item><title>{esc(p['title'])}</title><link>{BASE}/blog/{p['slug']}/</link><guid>{BASE}/blog/{p['slug']}/</guid><pubDate>{rfc822(p['date'])}</pubDate><description>{esc(p['desc'])}</description></item>" for p in live_posts)
-write("blog/rss.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>{BASE}/blog/</link><atom:link href="{BASE}/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Notes from RogueIQ.</description><language>en-us</language>{items}</channel></rss>\n')
+write("blog/rss.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>{BASE}/blog/</link><atom:link href="{BASE}/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Plain-language RogueIQ guides built on primary-source public data.</description><language>en-us</language>{items}</channel></rss>\n')
 
 today = date.today().isoformat()
-urls = [("/", today), ("/blog/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"]] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
+urls = [("/", today), ("/blog/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"].startswith("/")] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
 write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
 
-llms = [f"# RogueIQ\n", f"> RogueIQ ({BASE.replace('https://','')}) builds simple tools from public data. Tools run in the browser; user inputs are not sent or stored. Educational only, not financial advice.\n", "## Tools\n"]
-llms += [f"- [{t['name']}]({BASE}{t['url']}): {t['summary']}" if t["url"] else f"- {t['name']} (status: {t['status']}, not yet available): {t['summary']}" for t in SITE["tools"]]
-llms += ["\n## Blog\n", f"- [Blog index]({BASE}/blog/)", f"- [RSS feed]({BASE}/blog/rss.xml)"]
+link = lambda u: u if u.startswith("http") else BASE + u
+llms = [f"# RogueIQ\n", f"> {SITE['tagline']} {SITE['subline']}\n",
+        f"Tools run in the browser; user inputs stay on your device. {SITE['disclaimer']}\n", "## Tools\n"]
+llms += [f"- [{t['name']}]({link(t['url'])}): {t['summary']}" if t["url"] else f"- {t['name']} (status: {t['status']}, not yet available): {t['summary']}" for t in SITE["tools"]]
+llms += ["\n## Guides\n", f"- [Guides index]({BASE}/blog/)", f"- [RSS feed]({BASE}/blog/rss.xml)"]
 llms += [f"- [{p['title']}]({BASE}/blog/{p['slug']}/): {p['desc']}" for p in live_posts]
+llms += ["\n## Chart library (each chart lists its sources)\n"] + [f"- [{c['title']}]({BASE}{c['img']}) ({c['date']}). Sources: " + "; ".join(f"{x['label']}" + (f" <{x['url']}>" for _ in [0]).__next__() if x.get('url') else x['label'] for x in c['sources']) for c in SITE.get("charts", [])]
 llms += ["\n## Build log\n"] + [f"- {e['date']}: {e['text']}" for e in timeline]
 write("llms.txt", "\n".join(llms) + "\n")
 

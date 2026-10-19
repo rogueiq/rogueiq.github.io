@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>https://rogueiq.com/blog/</link><atom:link href="https://rogueiq.com/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Notes from RogueIQ.</description><language>en-us</language></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>https://rogueiq.com/blog/</link><atom:link href="https://rogueiq.com/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Plain-language RogueIQ guides built on primary-source public data.</description><language>en-us</language></channel></rss>

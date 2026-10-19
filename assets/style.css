@@ -1,11 +1,19 @@
-:root{--bg:#000;--text:#fff;--muted:#a3a3a3;--line:#222;--card:#0a0a0a;--accent:#00e676}
+:root{
+  /* Brand tokens. Swap the accent here; everything else follows. Lead: Volt Violet. */
+  --accent:#7C3AED;          /* Volt Violet */
+  --accent-2:#3B82F6;        /* electric blue, used only in the shimmer */
+  --accent-ink:#fff;         /* text on accent buttons */
+  --accent-soft:rgba(124,58,237,.14);
+  --shimmer:linear-gradient(100deg,var(--text) 0%,var(--text) 38%,#c4b5fd 48%,var(--accent-2) 54%,var(--text) 64%,var(--text) 100%);
+  --bg:#000;--text:#fff;--muted:#a3a3a3;--line:#222;--card:#0a0a0a;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:var(--text)}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 .wrap{max-width:680px;margin:0 auto;padding:0 22px}
-.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--accent);color:#000;padding:8px 12px;border-radius:8px;z-index:9}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--accent);color:var(--accent-ink);padding:8px 12px;border-radius:8px;z-index:9}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .muted{color:var(--muted)}
 .nav{position:sticky;top:0;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5}
@@ -13,7 +21,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .logo{font-weight:700;text-decoration:none;letter-spacing:-.01em}.logo span,h1 span{color:var(--accent)}
 nav a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:18px}nav a:hover{color:var(--text)}
 nav .tag{color:var(--accent);font-weight:600}
-@media(max-width:420px){nav a{margin-left:12px;font-size:14px}}
+@media(max-width:420px){nav a{margin-left:12px;font-size:14px}.btn{font-size:16px;padding:12px 18px}}
 .hero{padding:88px 0 56px}.hero.small{padding:64px 0 32px}
 h1{font-size:clamp(40px,9vw,64px);font-weight:700;letter-spacing:-.035em;line-height:1.05;margin:0 0 14px}
 .lead{font-size:20px;color:var(--muted);margin:0;max-width:30ch}
@@ -26,7 +34,7 @@ h3{font-size:18px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
 a.row:hover h3{color:var(--accent)}
 .row p{margin:0;color:var(--muted);font-size:15px}
 .badge{flex:none;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);vertical-align:middle}
-.badge.live{color:#000;background:var(--accent);border-color:var(--accent)}
+.badge.live{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
 .timeline{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .entry{padding:16px 0;border-bottom:1px solid var(--line)}
 .who{display:flex;align-items:center;gap:8px;font-size:15px;flex-wrap:wrap}
@@ -36,7 +44,7 @@ a.row:hover h3{color:var(--accent)}
 .news h2{color:var(--text);font-size:22px;text-transform:none;letter-spacing:-.01em;margin-bottom:4px}
 .signup{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .signup input{flex:1 1 200px;min-height:46px;background:#000;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:0 14px;font:inherit}
-.signup button{min-height:46px;padding:0 20px;border:0;border-radius:12px;background:var(--accent);color:#000;font:inherit;font-weight:600;cursor:pointer}
+.signup button{min-height:46px;padding:0 20px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;cursor:pointer}
 .signup .note{flex-basis:100%;margin:0;font-size:14px}
 .foot{border-top:1px solid var(--line);padding-top:24px;padding-bottom:40px;font-size:14px;color:var(--muted)}
 .foot p{margin:0 0 6px}.foot a{color:var(--muted)}
@@ -48,3 +56,32 @@ a.row:hover h3{color:var(--accent)}
 .table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
 .draft{background:#3a2a00;color:#ffd166;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600}
+
+/* ---- home v2 ---- */
+.hero{padding:72px 0 48px}
+.hero h1{font-size:clamp(40px,10vw,68px);max-width:12ch}
+.shimmer{background:var(--shimmer);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.shimmer{animation:none;background-position:50% 0}}
+.hero .lead{max-width:38ch;font-size:19px;color:#cfcfcf}
+.hook{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:26px 0 30px}
+.hook .muted{font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:12px 22px;line-height:1.25;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 8px 30px -10px var(--accent)}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #3a3a3a;box-shadow:none}.btn.ghost:hover{border-color:var(--accent)}
+.news{border-color:#2a2140;background:linear-gradient(180deg,var(--accent-soft),transparent 70%),var(--card)}
+.news h2{font-size:19px}
+.intro{color:#cfcfcf;margin:0 0 16px;max-width:52ch}
+.more{margin:14px 0 0;font-size:15px}.more a{color:var(--text);text-decoration-color:var(--accent);text-underline-offset:3px}
+.empty{padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0}
+.charts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:640px){.charts{grid-template-columns:1fr 1fr}}
+.chart figure{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);height:100%}
+.chart img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;background:#111}
+.chart figcaption{padding:12px 14px 14px}.chart h3{font-size:15.5px;line-height:1.35}
+.chart .src{font-size:13px;color:var(--muted);margin:6px 0 2px}.chart .src span{color:var(--text);font-weight:600;margin-right:4px}
+.chart .src a{color:var(--muted);text-decoration-color:var(--accent);text-underline-offset:2px}.chart .muted{font-size:12.5px;margin:0}
+.dot{display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--accent-ink)}
+.waitlist{border:1px solid var(--line);border-radius:18px;padding:26px}
+.waitlist h2{color:var(--text);font-size:19px;text-transform:none;letter-spacing:-.01em}.waitlist p{color:#cfcfcf;margin:0 0 14px}
+.foot .disc{color:var(--muted);font-size:14px;max-width:60ch}
