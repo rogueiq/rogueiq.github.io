@@ -68,3 +68,6 @@ Edit the `tools` list in `content/site.json`. `status` is `Live` or `Building`; 
 4. Run `python3 build.py`.
 
 Until then the form shows "Coming soon" and sends nothing.
+
+## Charts held back (compliance, Oct 19, 2026)
+The SOXL "pros sold / crowd bought 3x" chart and the MSTR/Metaplanet MSCI chart are off /charts/ until each has named sources with links and dates (Warren's review). The images and scripts stay in `rogueiq/chart-archive/` (`pros-vs-crowd-cyan.png`, `msci-btc-cyan.png`). To bring one back, add it to `charts` in `content/site.json` with full sources and an `as_of` line.

@@ -182,7 +182,7 @@ def chart_html(c):
     note = f'<p class="cnote">{esc(c["note"])}</p>' if c.get("note") else ""
     return (f'<li class="chart" id="{esc(c["id"])}"><figure><img src="{esc(c["img"])}" alt="{esc(c["alt"])}" loading="lazy" decoding="async">'
             f'<figcaption><h3>{esc(c["title"])}</h3><p class="take">{esc(c["takeaway"])}</p>{note}<p class="src"><span>Sources</span> {srcs}</p>'
-            f'<p class="muted"><time datetime="{c["date"]}">{nice(c["date"])}</time></p></figcaption></figure></li>')
+            f'<p class="asof">{esc(c.get("as_of") or "As of " + nice(c["date"]))}</p></figcaption></figure></li>')
 
 def chart_ld(c):
     return {"@type": "ImageObject", "name": c["title"], "caption": c["takeaway"], "contentUrl": BASE + c["img"], "description": c["alt"], "datePublished": c["date"],
@@ -240,7 +240,7 @@ home_body = f"""<section class="hero">
   <ol class="timeline">{''.join(log_html(e) for e in timeline)}</ol></section>
 <section aria-labelledby="nl-h">{NEWSLETTER}</section>
 <section class="waitlist" id="waitlist" aria-labelledby="wl-h"><h2 id="wl-h">{esc(wl['title'])}</h2>
-  <p>{esc(wl['text'])}</p><p><a class="btn ghost" href="{esc(wl['url'])}">{esc(wl['button'])}</a></p></section>
+  <p>{esc(wl['text'])}</p><p><a class="btn ghost" href="{esc(wl['url'])}">{esc(wl['button'])}</a></p><p class="fine">{esc(wl['fine'])}</p></section>
 <script src="/assets/networth/data.js" defer></script>
 <script src="/assets/networth/mini.js" defer></script>"""
 write("index.html", page("/", f"RogueIQ | {SITE['tagline']}", SITE["description"], home_body,
