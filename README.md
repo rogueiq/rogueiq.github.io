@@ -1,6 +1,8 @@
 # rogueiq.com
 
-The RogueIQ website. Plain files hosted free on GitHub Pages. `CNAME` (rogueiq.com) and `.nojekyll` must stay.
+The RogueIQ website. Plain files hosted free on GitHub Pages. `.nojekyll` must stay.
+
+> **LAUNCH TODO: re-add `CNAME`.** The custom domain was removed on main (commit 499e10c) so the checker works at rogueiq.github.io until launch. At launch, add a `CNAME` file containing `rogueiq.com` and set the custom domain again in Settings → Pages.
 
 You edit files in `content/`, then run one command that rebuilds the site:
 
