@@ -1,7 +1,18 @@
 # RogueIQ
 
-> RogueIQ (rogueiq.com) builds free, educational personal finance tools based on public data. Tools run in the browser; user inputs are not sent or stored. Nothing here is personalized financial advice.
+> RogueIQ (rogueiq.com) builds simple tools from public data. Tools run in the browser; user inputs are not sent or stored. Educational only, not financial advice.
 
 ## Tools
 
-- [Net Worth by Age Checker](https://rogueiq.com/networth-by-age/): Compares a household's net worth with US families whose household head is the same age, using the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). Optional filters: couple or single, kids, homeowner or renter, education, income, and work status.
+- [Net Worth by Age Checker](https://rogueiq.com/networth-by-age/): See how your net worth compares with US families your age. Federal Reserve 2025 survey data.
+- Primary-source finance news feed (status: Building, not yet available): Finance news traced to the original report, for creators and their AI agents.
+
+## Blog
+
+- [Blog index](https://rogueiq.com/blog/)
+- [RSS feed](https://rogueiq.com/blog/rss.xml)
+
+## Build log
+
+- 2026-10-19: Started building a primary-source finance news feed for creators and AI agents.
+- 2026-10-17: Launched the Net Worth by Age Checker (Fed SCF 2025 data, six filters).

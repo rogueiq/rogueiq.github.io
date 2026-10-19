@@ -1,0 +1,14 @@
+{
+  "name": "RogueIQ",
+  "url": "https://rogueiq.com",
+  "tagline": "Simple tools built on public data.",
+  "description": "RogueIQ builds simple, data-backed tools from public sources. See what's live, what we're building, and the build log.",
+  "x": "https://x.com/rogueiq",
+  "github": "https://github.com/rogueiq",
+  "tools": [
+    {"name": "Net Worth by Age Checker", "status": "Live", "url": "/networth-by-age/",
+     "summary": "See how your net worth compares with US families your age. Federal Reserve 2025 survey data."},
+    {"name": "Primary-source finance news feed", "status": "Building", "url": "",
+     "summary": "Finance news traced to the original report, for creators and their AI agents."}
+  ]
+}
