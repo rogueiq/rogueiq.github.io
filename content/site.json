@@ -54,7 +54,7 @@
     {
       "title": "How a 3x fund loses on a round trip",
       "date": "2026-10-19",
-      "img": "/assets/charts/leveraged-decay.png",
+      "img": "/assets/charts/leveraged-decay-cyan.png",
       "alt": "Chart showing how a daily-reset 3x leveraged fund can end below its starting value after the underlying index goes down and back up.",
       "sources": [
         {
@@ -74,7 +74,7 @@
     {
       "title": "Last week: the pros sold. The crowd bought 3x.",
       "date": "2026-10-19",
-      "img": "/assets/charts/pros-vs-crowd.png",
+      "img": "/assets/charts/pros-vs-crowd-cyan.png",
       "alt": "Chart contrasting hedge fund selling in Goldman's prime book with record retail inflows into the 3x leveraged semiconductor fund SOXL.",
       "sources": [
         {
@@ -98,7 +98,7 @@
     {
       "title": "$MSTR and Metaplanet could be cut from MSCI indexes",
       "date": "2026-10-16",
-      "img": "/assets/charts/msci-btc.png",
+      "img": "/assets/charts/msci-btc-cyan.png",
       "alt": "Chart comparing how much of Strategy's and Metaplanet's assets are bitcoin, with Strategy at about 94.5 percent and Metaplanet at about 97.9 percent.",
       "sources": [
         {

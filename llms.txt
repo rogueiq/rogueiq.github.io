@@ -34,4 +34,5 @@ Every tool is built once and works three ways: a web page for people, a JSON API
 - 2026-10-19: Opened the Net Worth by Age Checker to AI agents: a free JSON API and MCP server using the same Fed data and math as the web page, tested to give the same answers.
 - 2026-10-19: Started the chart archive. Every chart we post gets logged with its script, data files and source links.
 - 2026-10-19: Rebuilt the rogueiq.com home page preview around one idea: every tool works for people and for their AI agents.
+- 2026-10-19: Added sliders to the Net Worth by Age Checker for age, net worth and income. Results update as you slide, and typing an exact amount still works. Same math, re-tested.
 - 2026-10-17: Launched the Net Worth by Age Checker (Fed SCF 2025 data, six filters).

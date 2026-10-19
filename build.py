@@ -193,8 +193,10 @@ checker = SITE["tools"][0]
 MINI = f"""<div class="mini" id="try">
   <h2 class="mini-h">{esc(hook['label'])}</h2>
   <form id="mini-check" class="mini-form" novalidate>
-    <label><span>Your age</span><input name="age" type="number" inputmode="numeric" min="18" max="110" placeholder="34" autocomplete="off"></label>
-    <label><span>Net worth (US $)</span><input name="nw" type="text" inputmode="decimal" placeholder="150,000" autocomplete="off"></label>
+    <div class="mf"><label><span>Your age</span><input name="age" type="number" inputmode="numeric" min="18" max="110" placeholder="34" autocomplete="off"></label>
+      <div class="slider-row"><input class="slider" name="age_s" type="range" min="18" max="95" step="1" value="35" aria-label="Age slider"><output class="slider-out" data-for="age"></output></div></div>
+    <div class="mf"><label><span>Net worth (US $)</span><input name="nw" type="text" inputmode="decimal" placeholder="150,000" autocomplete="off"></label>
+      <div class="slider-row"><input class="slider" name="nw_s" type="range" aria-label="Net worth slider, -$1M to $50M+ in uneven steps"><output class="slider-out" data-for="nw"></output></div></div>
     <button type="submit">Check</button>
   </form>
   <p id="mini-error" class="mini-err" role="alert" hidden></p>
@@ -202,7 +204,7 @@ MINI = f"""<div class="mini" id="try">
     <p class="mr-head"></p><p class="mr-detail"></p><p class="mr-median muted"></p>
     <p><a href="{esc(checker['url'])}">Full breakdown, chart and filters →</a></p>
   </div>
-  <p class="muted mini-note">{esc(hook['note'])}</p>
+  <p class="muted mini-note">Slide for a quick answer or type an exact amount. {esc(hook['note'])}</p>
 </div>"""
 cards = "".join(f'<li><a class="card" href="{esc(c["url"])}"><h3>{esc(c["q"])}</h3><p>{esc(c["a"])}</p><span class="go">Find out →</span></a></li>' for c in st["cards"])
 toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="badge live">{esc(t["status"])}</span><h3>{esc(t["question"])}</h3><p class="preview">{esc(t["preview"])}</p><p class="muted small">{esc(t["name"])} · Web, API and MCP</p></a></li>' for t in SITE["tools"])
