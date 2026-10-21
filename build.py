@@ -120,7 +120,7 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="/">Rogue<span>IQ</span></a>
-  <nav aria-label="Main"><a href="/#tools">Tools</a><a href="/#agents">Agents</a><a href="/charts/">Charts</a><a class="tag" href="/#newsletter">Subscribe</a></nav>
+  <nav aria-label="Main"><a href="/#wire">The Wire</a><a href="/#check">Checker</a><a href="/#agents">Agents</a></nav>
 </div></header>
 <main id="main" class="wrap">
 {body}
@@ -209,48 +209,42 @@ MINI = f"""<div class="mini" id="try">
 cards = "".join(f'<li><a class="card" href="{esc(c["url"])}"><h3>{esc(c["q"])}</h3><p>{esc(c["a"])}</p><span class="go">Find out →</span></a></li>' for c in st["cards"])
 toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="badge live">{esc(t["status"])}</span><h3>{esc(t["question"])}</h3><p class="preview">{esc(t["preview"])}</p><p class="muted small">{esc(t["name"])} · Web, API and MCP</p></a></li>' for t in SITE["tools"])
 home_charts = [c for c in SITE["charts"] if c.get("home")]
+FEED = "https://rogueiq-feed.rogueiq.workers.dev"
+MCP = "https://rogueiq-tools.rogueiq.workers.dev/mcp"
+SNIP = '{\n  "mcpServers": {\n    "rogueiq": { "url": "' + MCP + '" }\n  }\n}'
 home_body = f"""<section class="hero">
-  <h1 class="shimmer">{esc(SITE['tagline'])}</h1>
-  <p class="lead">{esc(SITE['subline'])}</p>
-  <p class="cta"><a class="btn" href="{esc(checker['url'])}">Try a tool</a><a class="btn ghost" href="{esc(AG['docs'])}">Connect your agent</a></p>
-  {MINI}
+  <h1 class="shimmer">Get Smarter About Money.</h1>
+  <p class="lead">Tools for you and your AI, built on public data and facts you can verify. Your agent can plug into every one.</p>
+  <p class="cta"><a class="btn ember" href="{FEED}/">Open the feed</a><a class="btn ghost" href="{esc(checker['url'])}">Check your number</a></p>
+  <p class="muted small">Bringing an AI agent? <a href="#agents">Connect it here →</a></p>
 </section>
-<section id="start" aria-labelledby="start-h"><h2 id="start-h">{esc(st['title'])}</h2>
-  <p class="intro">{esc(st['intro'])}</p>
-  <ul class="cards">{cards}</ul>
+<section id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
+  <p class="big">Official releases, straight from the source.</p>
+  <p class="intro">Fed, BLS, BEA, SEC and more, posted the moment they publish. Each post links to the original document and breaks down what changed, so you see the facts behind the headline and where each release fits in the bigger economic picture.</p>
+  <ol class="wire" id="wire-list" aria-live="polite"><li class="muted">Loading the latest official posts…</li></ol>
+  <p class="cta"><a class="btn" href="{FEED}/">Open the full feed</a></p>
 </section>
-<section id="tools" aria-labelledby="tools-h"><h2 id="tools-h">Tools</h2>
-  <p class="big">Pick a question. Move the sliders. Get your answer.</p>
-  <ul class="cards">{toolcards}</ul></section>
+<section id="check" aria-labelledby="check-h"><h2 id="check-h">Net worth checker</h2>
+  <a class="card solo" href="{esc(checker['url'])}"><h3>How does your net worth compare for your age?</h3>
+  <p>Slide in your age and net worth to see where you land, using the Federal Reserve's Survey of Consumer Finances.</p><span class="go">Check your number →</span></a>
+</section>
 <section id="agents" class="agents" aria-labelledby="ag-h"><h2 id="ag-h">For agents</h2>
-  <p class="big">Built for your agent.</p>
-  <p class="intro">Every RogueIQ tool is available as an API and MCP server, so your assistant can run the numbers, cite the source, and keep you current.</p>
-  <pre class="code"><code>{esc(AG['mcp'])}</code></pre>
-  <p class="cta"><a class="btn" href="{esc(AG['docs'])}">View API docs</a><a class="btn ghost" href="{esc(AG['mcp_docs'])}">Add the MCP server</a></p>
+  <p class="big">Plug your AI into RogueIQ.</p>
+  <ul class="aglist">
+    <li><strong>MCP server</strong> <code>{MCP}</code></li>
+    <li><strong>API docs</strong> <a href="{esc(AG['docs'])}">OpenAPI and examples →</a></li>
+    <li><strong>Agent guides</strong> <a href="/llms.txt">llms.txt</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/SKILL.md">SKILL.md</a></li>
+  </ul>
+  <div class="snip"><pre class="code"><code id="snip">{esc(SNIP)}</code></pre><button type="button" class="copy" data-copy="snip">Copy</button></div>
 </section>
-<section id="charts" aria-labelledby="charts-h"><h2 id="charts-h">Live data</h2>
-  <p class="big">{esc(LD['title'])}</p>
-  <p class="kicker">{esc(LD['kicker'])}</p>
-  <p class="intro">{esc(LD['text'])}</p>
-  <ul class="charts">{"".join(chart_html(c) for c in home_charts)}</ul>
-  <p class="more"><a href="/charts/">See all charts →</a></p>
-</section>
-<section id="log" aria-labelledby="log-h"><h2 id="log-h">Build log</h2>
-  <p class="big">What we shipped this week.</p>
-  <ol class="timeline">{''.join(log_html(e) for e in timeline)}</ol></section>
-<section aria-labelledby="nl-h">{NEWSLETTER}</section>
-<section class="waitlist" id="waitlist" aria-labelledby="wl-h"><h2 id="wl-h">{esc(wl['title'])}</h2>
-  <p>{esc(wl['text'])}</p><p><a class="btn ghost" href="{esc(wl['url'])}">{esc(wl['button'])}</a></p><p class="fine">{esc(wl['fine'])}</p></section>
-<script src="/assets/networth/data.js" defer></script>
-<script src="/assets/networth/mini.js" defer></script>"""
+<script src="/assets/home.js" defer></script>"""
 write("index.html", page("/", f"RogueIQ | {SITE['tagline']}", SITE["description"], home_body,
       [ORG, {"@type": "WebSite", "@id": BASE + "/#site", "name": "RogueIQ", "url": BASE + "/", "description": SITE["description"], "publisher": {"@id": BASE + "/#org"}},
        *[{"@type": "WebApplication", "name": t["name"], "url": t["url"], "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "isAccessibleForFree": True,
           "description": t["summary"], "publisher": {"@id": BASE + "/#org"}, "potentialAction": {"@type": "Action", "name": "Net worth percentile API", "target": t["api"]}} for t in SITE["tools"]],
        {"@type": "WebAPI", "name": "RogueIQ Tools API and MCP server", "url": AG["docs"], "documentation": AG["docs"], "termsOfService": BASE + "/",
         "description": "Free, read-only RogueIQ money tools for AI agents: JSON API, OpenAPI spec and a remote MCP server.", "provider": {"@id": BASE + "/#org"}},
-       *[chart_ld(c) for c in home_charts]],
-      og_image=home_charts[0]["img"] if home_charts else None))
+       ]))
 
 charts_body = f"""<section class="hero small"><p class="kicker">{esc(LD['kicker'])}</p><h1>Charts</h1><p class="lead">{esc(LD['text'])}</p></section>
 <ul class="charts">{"".join(chart_html(c) for c in SITE["charts"])}</ul>"""

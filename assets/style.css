@@ -134,3 +134,12 @@ th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{co
 input.slider{border:0 !important;background:transparent !important;padding:0 !important;min-height:0 !important;box-shadow:none !important;width:auto}
 .chart .asof{font-size:13px;color:var(--soft-text);margin:4px 0 0}
 .waitlist .fine{font-size:13px;color:var(--muted);margin:0}
+/* v7 home */
+.btn.ember{background:var(--ember);color:var(--accent-ink);border-color:var(--ember)}
+.wire{list-style:none;margin:18px 0;padding:0;display:grid;gap:12px}
+.post{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--card)}
+.post p{margin:0 0 6px}.post-top{font-size:14px}.src{font-weight:600;margin-right:8px}.chk{color:var(--accent);font-size:13px}
+.post-title{font-weight:600}.post-ex{font-size:15px}.post-src{font-size:14px;color:var(--accent);text-decoration:none}
+.card.solo{max-width:640px}
+.aglist{list-style:none;padding:0;margin:14px 0;display:grid;gap:10px}.aglist code{word-break:break-all;font-size:14px;color:var(--accent)}
+.snip{position:relative}.copy{position:absolute;top:10px;right:10px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:6px 12px;font-weight:600;cursor:pointer}

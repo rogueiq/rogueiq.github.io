@@ -11,8 +11,8 @@
 <meta property="og:title" content="RogueIQ | Smarter about money. For you and your AI.">
 <meta property="og:description" content="RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.">
 <meta property="og:url" content="https://rogueiq.com/">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://rogueiq.com/assets/charts/ai-capex-gdp-cyan.png">
+<meta name="twitter:card" content="summary">
+
 <meta name="twitter:site" content="@rogueiq">
 <meta name="theme-color" content="#07090A">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
@@ -22,80 +22,45 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://rogueiq.com/#org", "name": "RogueIQ", "url": "https://rogueiq.com/", "slogan": "Smarter about money. For you and your AI.", "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.", "sameAs": ["https://x.com/rogueiq", "https://github.com/rogueiq"]}, {"@type": "WebSite", "@id": "https://rogueiq.com/#site", "name": "RogueIQ", "url": "https://rogueiq.com/", "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.", "publisher": {"@id": "https://rogueiq.com/#org"}}, {"@type": "WebApplication", "name": "Net Worth by Age Checker", "url": "https://rogueiq.github.io/networth-by-age/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "description": "See how your net worth compares with US families your age. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available).", "publisher": {"@id": "https://rogueiq.com/#org"}, "potentialAction": {"@type": "Action", "name": "Net worth percentile API", "target": "https://rogueiq-tools.rogueiq.workers.dev/v1/networth-by-age"}}, {"@type": "WebAPI", "name": "RogueIQ Tools API and MCP server", "url": "https://rogueiq-tools.rogueiq.workers.dev/docs", "documentation": "https://rogueiq-tools.rogueiq.workers.dev/docs", "termsOfService": "https://rogueiq.com/", "description": "Free, read-only RogueIQ money tools for AI agents: JSON API, OpenAPI spec and a remote MCP server.", "provider": {"@id": "https://rogueiq.com/#org"}}, {"@type": "ImageObject", "name": "Tech investment as a share of GDP is above the dot-com peak", "caption": "As of Q2 2026, private fixed investment in information processing equipment and software was 5.05% of GDP, above the dot-com peak of 4.46% (Q4 2000). Source: BEA via FRED, A679RC1Q027SBEA.", "contentUrl": "https://rogueiq.com/assets/charts/ai-capex-gdp-cyan.png", "description": "Line chart of business spending on information processing equipment and software as a share of US GDP since 1947, reaching a record in Q2 2026 above the Q4 2000 dot-com peak.", "datePublished": "2026-10-19", "creator": {"@id": "https://rogueiq.com/#org"}, "isBasedOn": ["https://fred.stlouisfed.org/series/A679RC1Q027SBEA", "https://fred.stlouisfed.org/series/GDP"], "citation": ["BEA via FRED: Private fixed investment in information processing equipment and software (A679RC1Q027SBEA)", "BEA via FRED: GDP"]}, {"@type": "ImageObject", "name": "How a 3x fund loses on a round trip", "caption": "If the index drops 10% and recovers, a 3x fund is still down about 7%.", "contentUrl": "https://rogueiq.com/assets/charts/leveraged-decay-cyan.png", "description": "Chart showing how a daily-reset 3x leveraged fund can end below its starting value after the underlying index goes down and back up.", "datePublished": "2026-10-19", "creator": {"@id": "https://rogueiq.com/#org"}, "isBasedOn": null, "citation": ["RogueIQ calculation (arithmetic of a daily-reset 3x fund)", "Daily reset: Direxion SOXL fund page"]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://rogueiq.com/#org", "name": "RogueIQ", "url": "https://rogueiq.com/", "slogan": "Smarter about money. For you and your AI.", "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.", "sameAs": ["https://x.com/rogueiq", "https://github.com/rogueiq"]}, {"@type": "WebSite", "@id": "https://rogueiq.com/#site", "name": "RogueIQ", "url": "https://rogueiq.com/", "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.", "publisher": {"@id": "https://rogueiq.com/#org"}}, {"@type": "WebApplication", "name": "Net Worth by Age Checker", "url": "https://rogueiq.github.io/networth-by-age/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "description": "See how your net worth compares with US families your age. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available).", "publisher": {"@id": "https://rogueiq.com/#org"}, "potentialAction": {"@type": "Action", "name": "Net worth percentile API", "target": "https://rogueiq-tools.rogueiq.workers.dev/v1/networth-by-age"}}, {"@type": "WebAPI", "name": "RogueIQ Tools API and MCP server", "url": "https://rogueiq-tools.rogueiq.workers.dev/docs", "documentation": "https://rogueiq-tools.rogueiq.workers.dev/docs", "termsOfService": "https://rogueiq.com/", "description": "Free, read-only RogueIQ money tools for AI agents: JSON API, OpenAPI spec and a remote MCP server.", "provider": {"@id": "https://rogueiq.com/#org"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="/">Rogue<span>IQ</span></a>
-  <nav aria-label="Main"><a href="/#tools">Tools</a><a href="/#agents">Agents</a><a href="/charts/">Charts</a><a class="tag" href="/#newsletter">Subscribe</a></nav>
+  <nav aria-label="Main"><a href="/#wire">The Wire</a><a href="/#check">Checker</a><a href="/#agents">Agents</a></nav>
 </div></header>
 <main id="main" class="wrap">
 <section class="hero">
-  <h1 class="shimmer">Smarter about money. For you and your AI.</h1>
-  <p class="lead">Free tools for your money you can try in seconds, built on public data you can check. Your agent can plug into every one.</p>
-  <p class="cta"><a class="btn" href="https://rogueiq.github.io/networth-by-age/">Try a tool</a><a class="btn ghost" href="https://rogueiq-tools.rogueiq.workers.dev/docs">Connect your agent</a></p>
-  <div class="mini" id="try">
-  <h2 class="mini-h">How does your net worth compare at your age?</h2>
-  <form id="mini-check" class="mini-form" novalidate>
-    <div class="mf"><label><span>Your age</span><input name="age" type="number" inputmode="numeric" min="18" max="110" placeholder="34" autocomplete="off"></label>
-      <div class="slider-row"><input class="slider" name="age_s" type="range" min="18" max="95" step="1" value="35" aria-label="Age slider"><output class="slider-out" data-for="age"></output></div></div>
-    <div class="mf"><label><span>Net worth (US $)</span><input name="nw" type="text" inputmode="decimal" placeholder="150,000" autocomplete="off"></label>
-      <div class="slider-row"><input class="slider" name="nw_s" type="range" aria-label="Net worth slider, -$1M to $50M+ in uneven steps"><output class="slider-out" data-for="nw"></output></div></div>
-    <button type="submit">Check</button>
-  </form>
-  <p id="mini-error" class="mini-err" role="alert" hidden></p>
-  <div id="mini-result" class="mini-result" aria-live="polite" hidden>
-    <p class="mr-head"></p><p class="mr-detail"></p><p class="mr-median muted"></p>
-    <p><a href="https://rogueiq.github.io/networth-by-age/">Full breakdown, chart and filters →</a></p>
-  </div>
-  <p class="muted mini-note">Slide for a quick answer or type an exact amount. Free and private. Runs in your browser. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available).</p>
-</div>
+  <h1 class="shimmer">Get Smarter About Money.</h1>
+  <p class="lead">Tools for you and your AI, built on public data and facts you can verify. Your agent can plug into every one.</p>
+  <p class="cta"><a class="btn ember" href="https://rogueiq-feed.rogueiq.workers.dev/">Open the feed</a><a class="btn ghost" href="https://rogueiq.github.io/networth-by-age/">Check your number</a></p>
+  <p class="muted small">Bringing an AI agent? <a href="#agents">Connect it here →</a></p>
 </section>
-<section id="start" aria-labelledby="start-h"><h2 id="start-h">Start here</h2>
-  <p class="intro">New to money numbers? Start with the question almost everyone asks.</p>
-  <ul class="cards"><li><a class="card" href="https://rogueiq.github.io/networth-by-age/"><h3>How do your savings compare with people your age?</h3><p>See what families your age have. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available).</p><span class="go">Find out →</span></a></li></ul>
+<section id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
+  <p class="big">Official releases, straight from the source.</p>
+  <p class="intro">Fed, BLS, BEA, SEC and more, posted the moment they publish. Each post links to the original document and breaks down what changed, so you see the facts behind the headline and where each release fits in the bigger economic picture.</p>
+  <ol class="wire" id="wire-list" aria-live="polite"><li class="muted">Loading the latest official posts…</li></ol>
+  <p class="cta"><a class="btn" href="https://rogueiq-feed.rogueiq.workers.dev/">Open the full feed</a></p>
 </section>
-<section id="tools" aria-labelledby="tools-h"><h2 id="tools-h">Tools</h2>
-  <p class="big">Pick a question. Move the sliders. Get your answer.</p>
-  <ul class="cards"><li><a class="card" href="https://rogueiq.github.io/networth-by-age/"><span class="badge live">Live</span><h3>How does my net worth compare at my age?</h3><p class="preview">Age 34 with $150K: higher than about 75% of families under 35.</p><p class="muted small">Net Worth by Age Checker · Web, API and MCP</p></a></li></ul></section>
+<section id="check" aria-labelledby="check-h"><h2 id="check-h">Net worth checker</h2>
+  <a class="card solo" href="https://rogueiq.github.io/networth-by-age/"><h3>How does your net worth compare for your age?</h3>
+  <p>Slide in your age and net worth to see where you land, using the Federal Reserve's Survey of Consumer Finances.</p><span class="go">Check your number →</span></a>
+</section>
 <section id="agents" class="agents" aria-labelledby="ag-h"><h2 id="ag-h">For agents</h2>
-  <p class="big">Built for your agent.</p>
-  <p class="intro">Every RogueIQ tool is available as an API and MCP server, so your assistant can run the numbers, cite the source, and keep you current.</p>
-  <pre class="code"><code>https://rogueiq-tools.rogueiq.workers.dev/mcp</code></pre>
-  <p class="cta"><a class="btn" href="https://rogueiq-tools.rogueiq.workers.dev/docs">View API docs</a><a class="btn ghost" href="https://rogueiq-tools.rogueiq.workers.dev/docs#mcp">Add the MCP server</a></p>
+  <p class="big">Plug your AI into RogueIQ.</p>
+  <ul class="aglist">
+    <li><strong>MCP server</strong> <code>https://rogueiq-tools.rogueiq.workers.dev/mcp</code></li>
+    <li><strong>API docs</strong> <a href="https://rogueiq-tools.rogueiq.workers.dev/docs">OpenAPI and examples →</a></li>
+    <li><strong>Agent guides</strong> <a href="/llms.txt">llms.txt</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/SKILL.md">SKILL.md</a></li>
+  </ul>
+  <div class="snip"><pre class="code"><code id="snip">{
+  &quot;mcpServers&quot;: {
+    &quot;rogueiq&quot;: { &quot;url&quot;: &quot;https://rogueiq-tools.rogueiq.workers.dev/mcp&quot; }
+  }
+}</code></pre><button type="button" class="copy" data-copy="snip">Copy</button></div>
 </section>
-<section id="charts" aria-labelledby="charts-h"><h2 id="charts-h">Live data</h2>
-  <p class="big">Fresh data, ready to use.</p>
-  <p class="kicker">Finance, with receipts.</p>
-  <p class="intro">Charts from primary sources like the Fed, BLS, SEC, and markets, with a plain-English line on what each means. Every chart shows its source.</p>
-  <ul class="charts"><li class="chart" id="ai-capex-gdp"><figure><img src="/assets/charts/ai-capex-gdp-cyan.png" alt="Line chart of business spending on information processing equipment and software as a share of US GDP since 1947, reaching a record in Q2 2026 above the Q4 2000 dot-com peak." loading="lazy" decoding="async"><figcaption><h3>Tech investment as a share of GDP is above the dot-com peak</h3><p class="take">As of Q2 2026, private fixed investment in information processing equipment and software was 5.05% of GDP, above the dot-com peak of 4.46% (Q4 2000). Source: BEA via FRED, A679RC1Q027SBEA.</p><p class="src"><span>Sources</span> <a href="https://fred.stlouisfed.org/series/A679RC1Q027SBEA">BEA via FRED: Private fixed investment in information processing equipment and software (A679RC1Q027SBEA)</a> · <a href="https://fred.stlouisfed.org/series/GDP">BEA via FRED: GDP</a></p><p class="asof">Data as of Q2 2026 (FRED series updated Sep 30, 2026)</p></figcaption></figure></li><li class="chart" id="leveraged-decay"><figure><img src="/assets/charts/leveraged-decay-cyan.png" alt="Chart showing how a daily-reset 3x leveraged fund can end below its starting value after the underlying index goes down and back up." loading="lazy" decoding="async"><figcaption><h3>How a 3x fund loses on a round trip</h3><p class="take">If the index drops 10% and recovers, a 3x fund is still down about 7%.</p><p class="cnote">Hypothetical illustration, not a prediction. Assumes daily reset, before fees; real results depend on the path of returns.</p><p class="src"><span>Sources</span> RogueIQ calculation (arithmetic of a daily-reset 3x fund) · Daily reset: Direxion SOXL fund page</p><p class="asof">Illustration as of Oct 19, 2026</p></figcaption></figure></li></ul>
-  <p class="more"><a href="/charts/">See all charts →</a></p>
-</section>
-<section id="log" aria-labelledby="log-h"><h2 id="log-h">Build log</h2>
-  <p class="big">What we shipped this week.</p>
-  <ol class="timeline"><li class="entry"><div class="who"><span class="dot" aria-hidden="true">R</span><strong>RogueIQ</strong><span class="muted">@rogueiq · <time datetime="2026-10-19">Oct 19, 2026</time></span></div><p><a href="https://rogueiq-tools.rogueiq.workers.dev/docs">Opened the Net Worth by Age Checker to AI agents: a free JSON API and MCP server using the same Fed data and math as the web page, tested to give the same answers.</a></p></li><li class="entry"><div class="who"><span class="dot" aria-hidden="true">R</span><strong>RogueIQ</strong><span class="muted">@rogueiq · <time datetime="2026-10-19">Oct 19, 2026</time></span></div><p><a href="/#charts">Started the chart archive. Every chart we post gets logged with its script, data files and source links.</a></p></li><li class="entry"><div class="who"><span class="dot" aria-hidden="true">R</span><strong>RogueIQ</strong><span class="muted">@rogueiq · <time datetime="2026-10-19">Oct 19, 2026</time></span></div><p>Rebuilt the rogueiq.com home page preview around one idea: every tool works for people and for their AI agents.</p></li><li class="entry"><div class="who"><span class="dot" aria-hidden="true">R</span><strong>RogueIQ</strong><span class="muted">@rogueiq · <time datetime="2026-10-19">Oct 19, 2026</time></span></div><p><a href="https://rogueiq.github.io/networth-by-age/">Added sliders to the Net Worth by Age Checker for age, net worth and income. Results update as you slide, and typing an exact amount still works. Same math, re-tested.</a></p></li><li class="entry"><div class="who"><span class="dot" aria-hidden="true">R</span><strong>RogueIQ</strong><span class="muted">@rogueiq · <time datetime="2026-10-17">Oct 17, 2026</time></span></div><p><a href="/networth-by-age/">Launched the Net Worth by Age Checker (Federal Reserve Survey of Consumer Finances, 2025 (latest available); six filters).</a></p></li></ol></section>
-<section aria-labelledby="nl-h"><div class="news" id="newsletter">
-  <h2 id="nl-h">One new tool and one chart that matters, every week.</h2>
-  <p class="muted">Free. Unsubscribe any time.</p>
-  <!-- ===== BEEHIIV EMBED GOES HERE =====
-       1. In beehiiv: Grow > Subscribe Forms > pick a form > Get embed code.
-       2. Delete everything between BEEHIIV-PLACEHOLDER-START and BEEHIIV-PLACEHOLDER-END below.
-       3. Paste the beehiiv <iframe> snippet in its place, then run: python3 build.py
-  -->
-  <!-- BEEHIIV-PLACEHOLDER-START: placeholder form. It sends nothing anywhere. -->
-  <form class="signup" action="#" onsubmit="this.querySelector('.note').hidden=false;return false;">
-    <label class="sr" for="nl-email">Email address</label>
-    <input id="nl-email" type="email" placeholder="you@email.com" autocomplete="email">
-    <button type="submit">Get it free</button>
-    <p class="note muted" hidden>Signup opens soon. This form isn't connected yet, so nothing was sent or saved.</p>
-  </form>
-  <!-- BEEHIIV-PLACEHOLDER-END -->
-</div></section>
-<section class="waitlist" id="waitlist" aria-labelledby="wl-h"><h2 id="wl-h">Early access</h2>
-  <p>Early access: Get new tools first and join a private community to discuss them. Join the waitlist.</p><p><a class="btn ghost" href="mailto:hello@rogueiq.com?subject=Early%20access%20waitlist&amp;body=Please%20add%20me%20to%20the%20RogueIQ%20early%20access%20waitlist.">Join the waitlist</a></p><p class="fine">Community discussion only. Not investment advice, and not an offer to buy or sell securities or invest in RogueIQ.</p></section>
-<script src="/assets/networth/data.js" defer></script>
-<script src="/assets/networth/mini.js" defer></script>
+<script src="/assets/home.js" defer></script>
 </main>
 <footer class="wrap foot">
   <p class="disc">RogueIQ provides general education and tools, not personalized investment, tax or legal advice. Data may be delayed or contain errors; check the source before making decisions. Nothing on this site is an offer or solicitation to buy or sell any security.</p>
