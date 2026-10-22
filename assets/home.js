@@ -9,7 +9,7 @@
     var items=r[0].slice(0,4),seen={};items.forEach(function(i){seen[i.id]=1});
     r[1].forEach(function(i){if(items.length<4&&!seen[i.id]){items.push(i);seen[i.id]=1}});
     if(!items.length)return fallback();list.innerHTML="";
-    items.forEach(function(i){var li=el("li","post");var top=el("p","post-top");top.append(el("span","src",i.source_name),el("span","chk","✓ Official source"),el("span","muted"," · "+ago(i.published_at)));
+    items.forEach(function(i){var li=el("li","post");var top=el("p","post-top");top.append(el("span","src",i.source_name),el("span","chk","✓ Official source"),el("span","muted post-date"," · "+new Date(i.published_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})+" ("+ago(i.published_at)+" ago)"));
       var t=el("p","post-title",i.title);var s=el("a","post-src","View source document →");s.href=i.source_url;s.rel="noopener";
       li.append(top,t);if(i.excerpt&&i.excerpt!==i.title&&i.source!=="edgar")li.append(el("p","post-ex muted",i.excerpt));li.append(s);list.append(li)})
   }).catch(fallback)}
