@@ -220,7 +220,7 @@ home_body = f"""<section class="hero">
 </section>
 <section id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
   <p class="big">Market-moving releases, from the source.</p>
-  <p class="intro">For people who hold or trade stocks, follow macro or watch crypto. Releases from the Fed, BLS, BEA, SEC and other agencies, each with its source and date, so you can check the facts behind the headline.</p>
+  <p class="intro">The easiest way to track major releases from U.S. government agencies. Skip the media and influencer takes, and have your AI agent dig into the source data so you can draw your own conclusions.</p>
   <ol class="wire" id="wire-list" aria-live="polite"><li class="muted">Loading the latest official posts…</li></ol>
   <p class="cta"><a class="btn" href="{FEED}/">Open the full feed</a></p>
 </section>
