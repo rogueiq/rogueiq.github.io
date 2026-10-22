@@ -2,3 +2,6 @@ screenshots/
 LAUNCH-CHECKLIST.md
 screenshots/
 dns-backup-webflow.json
+dist/
+.wrangler/
+dns-backup-*.json

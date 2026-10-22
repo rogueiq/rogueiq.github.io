@@ -8,13 +8,13 @@ RogueIQ provides general education and tools, not personalized investment, tax o
 
 Major releases from U.S. government agencies and official sources (Fed, BLS, BEA, Treasury, OFAC, SEC, EDGAR, CFTC, DOJ, Nasdaq halts) as structured data. Free, no auth.
 
-- [Web app](https://feed.rogueiq.com/)
-- [MCP server (streamable HTTP, read-only)](https://feed.rogueiq.com/mcp): tools list_items, get_item, get_breakdown, get_calendar, get_heads_up
-- [JSON API base](https://feed.rogueiq.com/v1): e.g. /v1/items, /v1/calendar, /v1/breakdown/{id}
-- [OpenAPI spec](https://feed.rogueiq.com/openapi.json)
-- [Docs](https://feed.rogueiq.com/docs/)
-- [Wire llms.txt](https://feed.rogueiq.com/llms.txt)
-- [Wire SKILL.md](https://feed.rogueiq.com/SKILL.md)
+- [Web app](https://rogueiq.com/wire/)
+- [MCP server (streamable HTTP, read-only)](https://rogueiq.com/wire/mcp): tools list_items, get_item, get_breakdown, get_calendar, get_heads_up
+- [JSON API base](https://rogueiq.com/wire/v1): e.g. /v1/items, /v1/calendar, /v1/breakdown/{id}
+- [OpenAPI spec](https://rogueiq.com/wire/openapi.json)
+- [Docs](https://rogueiq.com/wire/docs/)
+- [Wire llms.txt](https://rogueiq.com/wire/llms.txt)
+- [Wire SKILL.md](https://rogueiq.com/wire/SKILL.md)
 
 ## Other tools
 

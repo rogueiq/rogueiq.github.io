@@ -126,7 +126,7 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 </main>
 <footer class="wrap foot">
   <p class="disc">{esc(SITE['disclaimer'])}</p>
-  <p><a href="{SITE['x']}">@rogueiq on X</a> · <a href="https://feed.rogueiq.com/">The Wire</a> · <a href="https://feed.rogueiq.com/docs/">Agent docs</a> · <a href="/llms.txt">llms.txt</a></p>
+  <p><a href="{SITE['x']}">@rogueiq on X</a> · <a href="https://rogueiq.com/wire/">The Wire</a> · <a href="https://rogueiq.com/wire/docs/">Agent docs</a> · <a href="/llms.txt">llms.txt</a></p>
 </footer>
 </body>
 </html>
@@ -208,7 +208,7 @@ MINI = f"""<div class="mini" id="try">
 cards = "".join(f'<li><a class="card" href="{esc(c["url"])}"><h3>{esc(c["q"])}</h3><p>{esc(c["a"])}</p><span class="go">Find out →</span></a></li>' for c in st["cards"])
 toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="badge live">{esc(t["status"])}</span><h3>{esc(t["question"])}</h3><p class="preview">{esc(t["preview"])}</p><p class="muted small">{esc(t["name"])} · Web, API and MCP</p></a></li>' for t in SITE["tools"])
 home_charts = [c for c in SITE["charts"] if c.get("home")]
-FEED = "https://feed.rogueiq.com"
+FEED = "https://rogueiq.com/wire"
 MCP = "https://rogueiq-tools.rogueiq.workers.dev/mcp"
 SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\n  }\n}'
 home_body = f"""<section class="hero">
@@ -272,7 +272,7 @@ items = "".join(f"<item><title>{esc(p['title'])}</title><link>{BASE}/blog/{p['sl
 write("blog/rss.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>{BASE}/blog/</link><atom:link href="{BASE}/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Plain-language RogueIQ guides built on primary-source public data.</description><language>en-us</language>{items}</channel></rss>\n')
 
 today = date.today().isoformat()
-urls = [("/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"].startswith("/")] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
+urls = [("/", today), ("/wire/", today), ("/wire/docs/", today), ("/networth-by-age/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"].startswith("/")] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
 write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
@@ -283,13 +283,13 @@ llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified mon
         f"{SITE['disclaimer']}\n",
         "## The RogueIQ Wire (start here)\n",
         "Major releases from U.S. government agencies and official sources (Fed, BLS, BEA, Treasury, OFAC, SEC, EDGAR, CFTC, DOJ, Nasdaq halts) as structured data. Free, no auth.\n",
-        "- [Web app](https://feed.rogueiq.com/)",
-        "- [MCP server (streamable HTTP, read-only)](https://feed.rogueiq.com/mcp): tools list_items, get_item, get_breakdown, get_calendar, get_heads_up",
-        "- [JSON API base](https://feed.rogueiq.com/v1): e.g. /v1/items, /v1/calendar, /v1/breakdown/{id}",
-        "- [OpenAPI spec](https://feed.rogueiq.com/openapi.json)",
-        "- [Docs](https://feed.rogueiq.com/docs/)",
-        "- [Wire llms.txt](https://feed.rogueiq.com/llms.txt)",
-        "- [Wire SKILL.md](https://feed.rogueiq.com/SKILL.md)",
+        "- [Web app](https://rogueiq.com/wire/)",
+        "- [MCP server (streamable HTTP, read-only)](https://rogueiq.com/wire/mcp): tools list_items, get_item, get_breakdown, get_calendar, get_heads_up",
+        "- [JSON API base](https://rogueiq.com/wire/v1): e.g. /v1/items, /v1/calendar, /v1/breakdown/{id}",
+        "- [OpenAPI spec](https://rogueiq.com/wire/openapi.json)",
+        "- [Docs](https://rogueiq.com/wire/docs/)",
+        "- [Wire llms.txt](https://rogueiq.com/wire/llms.txt)",
+        "- [Wire SKILL.md](https://rogueiq.com/wire/SKILL.md)",
         "\n## Other tools\n",
         f"- [Net worth by age checker]({SITE['tools'][0]['url']}): calculator using the Federal Reserve Survey of Consumer Finances. API/MCP: {AG['docs']}"]
 write("llms.txt", "\n".join(llms) + "\n")
