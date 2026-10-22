@@ -215,7 +215,7 @@ MCP = "https://rogueiq-tools.rogueiq.workers.dev/mcp"
 SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\n  }\n}'
 home_body = f"""<section class="hero">
   <h1 class="shimmer">Get Smarter About Money.</h1>
-  <p class="lead">Nobody can predict the markets. Our tools show where you stand today, so you can decide with a clear head. Built for you and your AI agent.</p>
+  <p class="lead">Nobody can predict the markets. But our tools show you verified data on where the market stands today, so you can make your next move with more confidence. Built for you and your AI agents.</p>
   <p class="cta"><a class="btn ember" href="https://x.com/rogueiq">Follow on X</a><a class="btn ghost" href="#agents">Connect your agent</a></p>
 </section>
 <section id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
