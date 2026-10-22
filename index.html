@@ -4,25 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RogueIQ | Smarter about money. For you and your AI.</title>
-<meta name="description" content="RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.">
+<meta name="description" content="RogueIQ makes market tools and sourced money news that show where the market stands today, for you and your AI agent. Every item links its official source and date.">
 <link rel="canonical" href="https://rogueiq.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RogueIQ">
 <meta property="og:title" content="RogueIQ | Smarter about money. For you and your AI.">
-<meta property="og:description" content="RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.">
+<meta property="og:description" content="RogueIQ makes market tools and sourced money news that show where the market stands today, for you and your AI agent. Every item links its official source and date.">
 <meta property="og:url" content="https://rogueiq.com/">
 <meta name="twitter:card" content="summary">
 
 <meta name="twitter:site" content="@rogueiq">
 <meta name="theme-color" content="#07090A">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
-<link rel="alternate" type="application/rss+xml" title="RogueIQ blog" href="/blog/rss.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%2322E6D0%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://rogueiq.com/#org", "name": "RogueIQ", "url": "https://rogueiq.com/", "slogan": "Smarter about money. For you and your AI.", "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.", "sameAs": ["https://x.com/rogueiq", "https://github.com/rogueiq"]}, {"@type": "WebSite", "@id": "https://rogueiq.com/#site", "name": "RogueIQ", "url": "https://rogueiq.com/", "description": "RogueIQ makes free money tools built on public data you can check, for people and their AI agents. Every tool works as a web page, an API and an MCP server. Education and tools, not personalized financial advice.", "publisher": {"@id": "https://rogueiq.com/#org"}}, {"@type": "WebAPI", "name": "RogueIQ Tools API and MCP server", "url": "https://rogueiq-tools.rogueiq.workers.dev/docs", "documentation": "https://rogueiq-tools.rogueiq.workers.dev/docs", "termsOfService": "https://rogueiq.com/", "description": "Free, read-only RogueIQ money tools for AI agents: JSON API, OpenAPI spec and a remote MCP server.", "provider": {"@id": "https://rogueiq.com/#org"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://rogueiq.com/#org", "name": "RogueIQ", "url": "https://rogueiq.com/", "slogan": "Smarter about money. For you and your AI.", "description": "RogueIQ makes market tools and sourced money news that show where the market stands today, for you and your AI agent. Every item links its official source and date.", "sameAs": ["https://x.com/rogueiq", "https://github.com/rogueiq"]}, {"@type": "WebSite", "@id": "https://rogueiq.com/#site", "name": "RogueIQ", "url": "https://rogueiq.com/", "description": "RogueIQ makes market tools and sourced money news that show where the market stands today, for you and your AI agent. Every item links its official source and date.", "publisher": {"@id": "https://rogueiq.com/#org"}}, {"@type": "WebAPI", "name": "RogueIQ Tools API and MCP server", "url": "https://rogueiq-tools.rogueiq.workers.dev/docs", "documentation": "https://rogueiq-tools.rogueiq.workers.dev/docs", "termsOfService": "https://rogueiq.com/", "description": "Free, read-only RogueIQ money tools for AI agents: JSON API, OpenAPI spec and a remote MCP server.", "provider": {"@id": "https://rogueiq.com/#org"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -40,28 +39,31 @@
   <p class="big">Market-moving releases, from the source.</p>
   <p class="intro">The easiest way to track major releases from U.S. government agencies. Skip the media and influencer takes, and have your AI agent dig into the source data so you can draw your own conclusions.</p>
   <ol class="wire" id="wire-list" aria-live="polite"><li class="muted">Loading the latest official posts…</li></ol>
-  <p class="cta"><a class="btn" href="https://rogueiq-feed.rogueiq.workers.dev/">Open the full feed</a></p>
+  <p class="cta"><a class="btn" href="https://feed.rogueiq.com/">Open the full feed</a></p>
 </section>
 <section id="agents" class="agents" aria-labelledby="ag-h"><h2 id="ag-h">For agents</h2>
-  <p class="big">Give your AI agent the Wire's data.</p>
-  <p class="intro">Every item comes as structured JSON with its official source link, publish time and disclaimer.</p>
+  <p class="big">Plug your AI agent into the Wire.</p>
+  <p class="intro">Free, with no sign-up or API key. Every item comes with its official source link, publish time and disclaimer.</p>
   <ul class="aglist">
-    <li><strong>Wire JSON API</strong> <code>https://rogueiq-feed.rogueiq.workers.dev/v1/items</code> <span class="muted small">Filter by source, topic, keyword or date. Also /v1/calendar and /v1/breakdown/&#123;id&#125;.</span> <a href="https://rogueiq-feed.rogueiq.workers.dev/openapi.json">OpenAPI spec →</a></li>
-    <li><strong>Wire MCP server</strong> <code>https://rogueiq-feed.rogueiq.workers.dev/mcp</code> <span class="muted small">Tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up.</span></li>
-    <li class="muted small">Also available: the <a href="https://rogueiq-tools.rogueiq.workers.dev/docs">RogueIQ Tools API and MCP</a> (<code>https://rogueiq-tools.rogueiq.workers.dev/mcp</code>), currently one tool, the net worth by age percentile. Guides: <a href="/llms.txt">llms.txt</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/SKILL.md">SKILL.md</a></li>
+    <li><strong>MCP server</strong> <code>https://feed.rogueiq.com/mcp</code></li>
   </ul>
   <div class="snip"><pre class="code"><code id="snip">{
   &quot;mcpServers&quot;: {
-    &quot;rogueiq-wire&quot;: { &quot;url&quot;: &quot;https://rogueiq-feed.rogueiq.workers.dev/mcp&quot; }
+    &quot;rogueiq-wire&quot;: { &quot;url&quot;: &quot;https://feed.rogueiq.com/mcp&quot; }
   }
 }</code></pre><button type="button" class="copy" data-copy="snip">Copy</button></div>
+  <ul class="aglist">
+    <li><strong>JSON API</strong> <code>https://feed.rogueiq.com/v1</code></li>
+    <li><code>GET /v1/items?source=fed,bls,bea&amp;limit=5</code></li>
+    <li><code>GET /v1/calendar?days=7</code></li>
+    <li><a href="https://feed.rogueiq.com/docs/">Docs</a> · <a href="https://feed.rogueiq.com/openapi.json">OpenAPI</a> · <a href="https://feed.rogueiq.com/llms.txt">llms.txt</a> · <a href="https://feed.rogueiq.com/SKILL.md">SKILL.md</a></li>
+  </ul>
 </section>
 <script src="/assets/home.js" defer></script>
 </main>
 <footer class="wrap foot">
-  <ul class="trust"><li><a href="https://rogueiq-feed.rogueiq.workers.dev/v1/sources">Sources</a></li><li><a href="/llms.txt">Methodology</a></li><li>No picks or buy/sell calls</li></ul>
   <p class="disc">RogueIQ provides general education and tools, not personalized investment, tax or legal advice. Data may be delayed or contain errors; check the source before making decisions. Nothing on this site is an offer or solicitation to buy or sell any security.</p>
-  <p><a href="https://x.com/rogueiq">@rogueiq</a> · <a href="/blog/">Guides</a> · <a href="/blog/rss.xml">RSS</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/docs">For AI agents</a> · <a href="/llms.txt">llms.txt</a></p>
+  <p><a href="https://x.com/rogueiq">@rogueiq on X</a> · <a href="https://feed.rogueiq.com/">The Wire</a> · <a href="https://feed.rogueiq.com/docs/">Agent docs</a> · <a href="/llms.txt">llms.txt</a></p>
 </footer>
 </body>
 </html>

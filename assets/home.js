@@ -1,5 +1,5 @@
 (function(){
-  var FEED="https://rogueiq-feed.rogueiq.workers.dev";
+  var FEED="https://feed.rogueiq.com";
   var list=document.getElementById("wire-list");
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
   function ago(iso){var m=Math.round((Date.now()-new Date(iso))/60000);if(m<60)return m+"m";var h=Math.round(m/60);return h<48?h+"h":Math.round(h/24)+"d"}

@@ -1,36 +1,21 @@
 # RogueIQ
 
-> Smarter about money. For you and your AI. Free tools for your money you can try in seconds, built on public data you can check. Your agent can plug into every one.
+> Get Smarter About Money. Market tools and verified money news that show where the market stands today, for people and their AI agents. Every claim carries a primary source and date. No buy/sell calls or picks.
 
-Every tool is built once and works three ways: a web page for people, a JSON API, and an MCP server for agents. Web tools run in the browser; inputs stay on the device. RogueIQ provides general education and tools, not personalized investment, tax or legal advice. Data may be delayed or contain errors; check the source before making decisions. Nothing on this site is an offer or solicitation to buy or sell any security.
+RogueIQ provides general education and tools, not personalized investment, tax or legal advice. Data may be delayed or contain errors; check the source before making decisions. Nothing on this site is an offer or solicitation to buy or sell any security.
 
-## Tools
+## The RogueIQ Wire (start here)
 
-- [Net Worth by Age Checker](https://rogueiq.github.io/networth-by-age/): See how your net worth compares with US families your age. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available). API: https://rogueiq-tools.rogueiq.workers.dev/v1/networth-by-age
+Major releases from U.S. government agencies and official sources (Fed, BLS, BEA, Treasury, OFAC, SEC, EDGAR, CFTC, DOJ, Nasdaq halts) as structured data. Free, no auth.
 
-## For AI agents
+- [Web app](https://feed.rogueiq.com/)
+- [MCP server (streamable HTTP, read-only)](https://feed.rogueiq.com/mcp): tools list_items, get_item, get_breakdown, get_calendar, get_heads_up
+- [JSON API base](https://feed.rogueiq.com/v1): e.g. /v1/items, /v1/calendar, /v1/breakdown/{id}
+- [OpenAPI spec](https://feed.rogueiq.com/openapi.json)
+- [Docs](https://feed.rogueiq.com/docs/)
+- [Wire llms.txt](https://feed.rogueiq.com/llms.txt)
+- [Wire SKILL.md](https://feed.rogueiq.com/SKILL.md)
 
-- [API and MCP docs](https://rogueiq-tools.rogueiq.workers.dev/docs)
-- [MCP server (streamable HTTP, no auth)](https://rogueiq-tools.rogueiq.workers.dev/mcp)
-- [OpenAPI spec](https://rogueiq-tools.rogueiq.workers.dev/openapi.json)
-- [Tools llms.txt](https://rogueiq-tools.rogueiq.workers.dev/llms.txt)
-- [SKILL.md](https://rogueiq-tools.rogueiq.workers.dev/SKILL.md)
+## Other tools
 
-## Charts (each chart lists its sources)
-
-- [All charts](https://rogueiq.com/charts/)
-- [Tech investment as a share of GDP is above the dot-com peak](https://rogueiq.com/charts/#ai-capex-gdp) (2026-10-19): As of Q2 2026, private fixed investment in information processing equipment and software was 5.05% of GDP, above the dot-com peak of 4.46% (Q4 2000). Source: BEA via FRED, A679RC1Q027SBEA. Sources: BEA via FRED: Private fixed investment in information processing equipment and software (A679RC1Q027SBEA) <https://fred.stlouisfed.org/series/A679RC1Q027SBEA>; BEA via FRED: GDP <https://fred.stlouisfed.org/series/GDP>
-- [How a 3x fund loses on a round trip](https://rogueiq.com/charts/#leveraged-decay) (2026-10-19): If the index drops 10% and recovers, a 3x fund is still down about 7%. Sources: RogueIQ calculation (arithmetic of a daily-reset 3x fund); Daily reset: Direxion SOXL fund page
-
-## Guides
-
-- [Guides index](https://rogueiq.com/blog/)
-- [RSS feed](https://rogueiq.com/blog/rss.xml)
-
-## Build log
-
-- 2026-10-19: Opened the Net Worth by Age Checker to AI agents: a free JSON API and MCP server using the same Fed data and math as the web page, tested to give the same answers.
-- 2026-10-19: Started the chart archive. Every chart we post gets logged with its script, data files and source links.
-- 2026-10-19: Rebuilt the rogueiq.com home page preview around one idea: every tool works for people and for their AI agents.
-- 2026-10-19: Added sliders to the Net Worth by Age Checker for age, net worth and income. Results update as you slide, and typing an exact amount still works. Same math, re-tested.
-- 2026-10-17: Launched the Net Worth by Age Checker (Federal Reserve Survey of Consumer Finances, 2025 (latest available); six filters).
+- [Net worth by age checker](https://rogueiq.github.io/networth-by-age/): calculator using the Federal Reserve Survey of Consumer Finances. API/MCP: https://rogueiq-tools.rogueiq.workers.dev/docs

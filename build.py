@@ -108,7 +108,6 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <meta name="twitter:site" content="@rogueiq">
 <meta name="theme-color" content="#07090A">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
-<link rel="alternate" type="application/rss+xml" title="RogueIQ blog" href="/blog/rss.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%2322E6D0%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,9 +125,8 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 {body}
 </main>
 <footer class="wrap foot">
-  <ul class="trust"><li><a href="https://rogueiq-feed.rogueiq.workers.dev/v1/sources">Sources</a></li><li><a href="/llms.txt">Methodology</a></li><li>No picks or buy/sell calls</li></ul>
   <p class="disc">{esc(SITE['disclaimer'])}</p>
-  <p><a href="{SITE['x']}">@rogueiq</a> · <a href="/blog/">Guides</a> · <a href="/blog/rss.xml">RSS</a> · <a href="{SITE['agents']['docs']}">For AI agents</a> · <a href="/llms.txt">llms.txt</a></p>
+  <p><a href="{SITE['x']}">@rogueiq on X</a> · <a href="https://feed.rogueiq.com/">The Wire</a> · <a href="https://feed.rogueiq.com/docs/">Agent docs</a> · <a href="/llms.txt">llms.txt</a></p>
 </footer>
 </body>
 </html>
@@ -210,7 +208,7 @@ MINI = f"""<div class="mini" id="try">
 cards = "".join(f'<li><a class="card" href="{esc(c["url"])}"><h3>{esc(c["q"])}</h3><p>{esc(c["a"])}</p><span class="go">Find out →</span></a></li>' for c in st["cards"])
 toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="badge live">{esc(t["status"])}</span><h3>{esc(t["question"])}</h3><p class="preview">{esc(t["preview"])}</p><p class="muted small">{esc(t["name"])} · Web, API and MCP</p></a></li>' for t in SITE["tools"])
 home_charts = [c for c in SITE["charts"] if c.get("home")]
-FEED = "https://rogueiq-feed.rogueiq.workers.dev"
+FEED = "https://feed.rogueiq.com"
 MCP = "https://rogueiq-tools.rogueiq.workers.dev/mcp"
 SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\n  }\n}'
 home_body = f"""<section class="hero">
@@ -225,14 +223,18 @@ home_body = f"""<section class="hero">
   <p class="cta"><a class="btn" href="{FEED}/">Open the full feed</a></p>
 </section>
 <section id="agents" class="agents" aria-labelledby="ag-h"><h2 id="ag-h">For agents</h2>
-  <p class="big">Give your AI agent the Wire's data.</p>
-  <p class="intro">Every item comes as structured JSON with its official source link, publish time and disclaimer.</p>
+  <p class="big">Plug your AI agent into the Wire.</p>
+  <p class="intro">Free, with no sign-up or API key. Every item comes with its official source link, publish time and disclaimer.</p>
   <ul class="aglist">
-    <li><strong>Wire JSON API</strong> <code>{FEED}/v1/items</code> <span class="muted small">Filter by source, topic, keyword or date. Also /v1/calendar and /v1/breakdown/&#123;id&#125;.</span> <a href="{FEED}/openapi.json">OpenAPI spec →</a></li>
-    <li><strong>Wire MCP server</strong> <code>{FEED}/mcp</code> <span class="muted small">Tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up.</span></li>
-    <li class="muted small">Also available: the <a href="{esc(AG['docs'])}">RogueIQ Tools API and MCP</a> (<code>{MCP}</code>), currently one tool, the net worth by age percentile. Guides: <a href="/llms.txt">llms.txt</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/SKILL.md">SKILL.md</a></li>
+    <li><strong>MCP server</strong> <code>{FEED}/mcp</code></li>
   </ul>
   <div class="snip"><pre class="code"><code id="snip">{esc(SNIP)}</code></pre><button type="button" class="copy" data-copy="snip">Copy</button></div>
+  <ul class="aglist">
+    <li><strong>JSON API</strong> <code>{FEED}/v1</code></li>
+    <li><code>GET /v1/items?source=fed,bls,bea&amp;limit=5</code></li>
+    <li><code>GET /v1/calendar?days=7</code></li>
+    <li><a href="{FEED}/docs/">Docs</a> · <a href="{FEED}/openapi.json">OpenAPI</a> · <a href="{FEED}/llms.txt">llms.txt</a> · <a href="{FEED}/SKILL.md">SKILL.md</a></li>
+  </ul>
 </section>
 <script src="/assets/home.js" defer></script>"""
 write("index.html", page("/", f"RogueIQ | {SITE['tagline']}", SITE["description"], home_body,
@@ -270,24 +272,26 @@ items = "".join(f"<item><title>{esc(p['title'])}</title><link>{BASE}/blog/{p['sl
 write("blog/rss.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>{BASE}/blog/</link><atom:link href="{BASE}/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Plain-language RogueIQ guides built on primary-source public data.</description><language>en-us</language>{items}</channel></rss>\n')
 
 today = date.today().isoformat()
-urls = [("/", today), ("/charts/", today), ("/blog/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"].startswith("/")] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
+urls = [("/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"].startswith("/")] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
 write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
 
 link = lambda u: u if u.startswith("http") else BASE + u
 AG = SITE["agents"]
-llms = [f"# RogueIQ\n", f"> {SITE['tagline']} {SITE['subline']}\n",
-        f"Every tool is built once and works three ways: a web page for people, a JSON API, and an MCP server for agents. Web tools run in the browser; inputs stay on the device. {SITE['disclaimer']}\n",
-        "## Tools\n"]
-llms += [f"- [{t['name']}]({link(t['url'])}): {t['summary']} API: {t['api']}" for t in SITE["tools"]]
-llms += ["\n## For AI agents\n", f"- [API and MCP docs]({AG['docs']})", f"- [MCP server (streamable HTTP, no auth)]({AG['mcp']})",
-         f"- [OpenAPI spec]({AG['openapi']})", f"- [Tools llms.txt]({AG['llms']})", f"- [SKILL.md]({AG['skill']})"]
-llms += ["\n## Charts (each chart lists its sources)\n", f"- [All charts]({BASE}/charts/)"]
-llms += [f"- [{c['title']}]({BASE}/charts/#{c['id']}) ({c['date']}): {c['takeaway']} Sources: " + "; ".join(x['label'] + (f" <{x['url']}>" if x.get('url') else "") for x in c['sources']) for c in SITE["charts"]]
-llms += ["\n## Guides\n", f"- [Guides index]({BASE}/blog/)", f"- [RSS feed]({BASE}/blog/rss.xml)"]
-llms += [f"- [{p['title']}]({BASE}/blog/{p['slug']}/): {p['desc']}" for p in live_posts]
-llms += ["\n## Build log\n"] + [f"- {e['date']}: {e['text']}" for e in timeline]
+llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified money news that show where the market stands today, for people and their AI agents. Every claim carries a primary source and date. No buy/sell calls or picks.\n",
+        f"{SITE['disclaimer']}\n",
+        "## The RogueIQ Wire (start here)\n",
+        "Major releases from U.S. government agencies and official sources (Fed, BLS, BEA, Treasury, OFAC, SEC, EDGAR, CFTC, DOJ, Nasdaq halts) as structured data. Free, no auth.\n",
+        "- [Web app](https://feed.rogueiq.com/)",
+        "- [MCP server (streamable HTTP, read-only)](https://feed.rogueiq.com/mcp): tools list_items, get_item, get_breakdown, get_calendar, get_heads_up",
+        "- [JSON API base](https://feed.rogueiq.com/v1): e.g. /v1/items, /v1/calendar, /v1/breakdown/{id}",
+        "- [OpenAPI spec](https://feed.rogueiq.com/openapi.json)",
+        "- [Docs](https://feed.rogueiq.com/docs/)",
+        "- [Wire llms.txt](https://feed.rogueiq.com/llms.txt)",
+        "- [Wire SKILL.md](https://feed.rogueiq.com/SKILL.md)",
+        "\n## Other tools\n",
+        f"- [Net worth by age checker]({SITE['tools'][0]['url']}): calculator using the Federal Reserve Survey of Consumer Finances. API/MCP: {AG['docs']}"]
 write("llms.txt", "\n".join(llms) + "\n")
 
 print(f"Built: {len(posts)} post(s) ({len(posts)-len(live_posts)} draft), {len(timeline)} log entries" + (" [PREVIEW: drafts included, do not publish]" if PREVIEW else ""))
