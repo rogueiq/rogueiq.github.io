@@ -127,9 +127,6 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 </main>
 <footer class="wrap foot">
   <ul class="trust"><li><a href="https://rogueiq-feed.rogueiq.workers.dev/v1/sources">Sources</a></li><li><a href="/llms.txt">Methodology</a></li><li>No picks or buy/sell calls</li></ul>
-  <!-- EMAIL: placeholder form. Replace action with the beehiiv embed/endpoint when set up. -->
-  <form class="email" action="#" onsubmit="event.preventDefault();this.querySelector('p').hidden=false"><label for="em" class="muted small">Get updates by email</label>
-    <div><input id="em" type="email" placeholder="you@example.com" required><button type="submit">Subscribe</button></div><p class="muted small" hidden>Thanks. Email signup opens soon.</p></form>
   <p class="disc">{esc(SITE['disclaimer'])}</p>
   <p><a href="{SITE['x']}">@rogueiq</a> · <a href="/blog/">Guides</a> · <a href="/blog/rss.xml">RSS</a> · <a href="{SITE['agents']['docs']}">For AI agents</a> · <a href="/llms.txt">llms.txt</a></p>
 </footer>
@@ -215,11 +212,11 @@ toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="ba
 home_charts = [c for c in SITE["charts"] if c.get("home")]
 FEED = "https://rogueiq-feed.rogueiq.workers.dev"
 MCP = "https://rogueiq-tools.rogueiq.workers.dev/mcp"
-SNIP = '{\n  "mcpServers": {\n    "rogueiq": { "url": "' + MCP + '" }\n  }\n}'
+SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\n  }\n}'
 home_body = f"""<section class="hero">
   <h1 class="shimmer">Get Smarter About Money.</h1>
-  <p class="lead">Market tools and sourced news that show where you stand today. Built for you and your AI agent.</p>
-  <p class="cta"><a class="btn ember" href="https://x.com/rogueiq">Follow along on X</a><a class="btn ghost" href="#agents">Connect your agent</a></p>
+  <p class="lead">Nobody can predict the markets. Our tools show where you stand today, so you can decide with a clear head. Built for you and your AI agent.</p>
+  <p class="cta"><a class="btn ember" href="https://x.com/rogueiq">Follow on X</a><a class="btn ghost" href="#agents">Connect your agent</a></p>
 </section>
 <section id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
   <p class="big">Market-moving releases, from the source.</p>
@@ -228,16 +225,14 @@ home_body = f"""<section class="hero">
   <p class="cta"><a class="btn" href="{FEED}/">Open the full feed</a></p>
 </section>
 <section id="agents" class="agents" aria-labelledby="ag-h"><h2 id="ag-h">For agents</h2>
-  <p class="big">Give your AI agent the same sourced data.</p>
+  <p class="big">Give your AI agent the Wire's data.</p>
+  <p class="intro">Every item comes as structured JSON with its official source link, publish time and disclaimer.</p>
   <ul class="aglist">
-    <li><strong>MCP server</strong> <code>{MCP}</code></li>
-    <li><strong>API docs</strong> <a href="{esc(AG['docs'])}">OpenAPI and examples →</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/SKILL.md">SKILL.md</a></li>
+    <li><strong>Wire JSON API</strong> <code>{FEED}/v1/items</code> <span class="muted small">Filter by source, topic, keyword or date. Also /v1/calendar and /v1/breakdown/&#123;id&#125;.</span> <a href="{FEED}/openapi.json">OpenAPI spec →</a></li>
+    <li><strong>Wire MCP server</strong> <code>{FEED}/mcp</code> <span class="muted small">Tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up.</span></li>
+    <li class="muted small">Also available: the <a href="{esc(AG['docs'])}">RogueIQ Tools API and MCP</a> (<code>{MCP}</code>), currently one tool, the net worth by age percentile. Guides: <a href="/llms.txt">llms.txt</a> · <a href="https://rogueiq-tools.rogueiq.workers.dev/SKILL.md">SKILL.md</a></li>
   </ul>
   <div class="snip"><pre class="code"><code id="snip">{esc(SNIP)}</code></pre><button type="button" class="copy" data-copy="snip">Copy</button></div>
-</section>
-<section id="tool" aria-labelledby="tool-h"><h2 id="tool-h">Market tool</h2>
-  <div class="card solo"><span class="badge">Coming soon</span><h3>A market tool that shows where things stand</h3>
-  <p>Our first indicator, built on public market data. It will show signals and leave the decisions to you.</p></div>
 </section>
 <script src="/assets/home.js" defer></script>"""
 write("index.html", page("/", f"RogueIQ | {SITE['tagline']}", SITE["description"], home_body,
