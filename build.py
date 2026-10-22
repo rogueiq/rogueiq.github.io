@@ -119,7 +119,7 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="/">Rogue<span>IQ</span></a>
-  <nav aria-label="Main"><a href="/#wire">The Wire</a><a href="/#agents">Agents</a></nav>
+  <nav aria-label="Main"><a href="/wire/">The Wire</a><a href="/#agents">Agents</a></nav>
 </div></header>
 <main id="main" class="wrap">
 {body}
