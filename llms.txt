@@ -15,7 +15,19 @@ Major releases from U.S. government agencies and official sources (Fed, BLS, BEA
 - [Docs](https://rogueiq.com/wire/docs/)
 - [Wire llms.txt](https://rogueiq.com/wire/llms.txt)
 - [Wire SKILL.md](https://rogueiq.com/wire/SKILL.md)
+- [Wire item pages](https://rogueiq.com/wire/sitemap.xml): one page per release at https://rogueiq.com/wire/item/{id}/
 
-## Other tools
+## Net worth by age
 
-- [Net worth by age checker](https://rogueiq.github.io/networth-by-age/): calculator using the Federal Reserve Survey of Consumer Finances. API/MCP: https://rogueiq-tools.rogueiq.workers.dev/docs
+Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). Free, no auth.
+
+- [Web checker](https://rogueiq.com/networth-by-age/)
+- [MCP server (streamable HTTP, read-only)](https://rogueiq.com/networth-by-age/mcp): tool networth_percentile_by_age
+- [JSON API](https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)
+- [OpenAPI spec](https://rogueiq.com/networth-by-age/api/openapi.json)
+- [llms.txt](https://rogueiq.com/networth-by-age/api/llms.txt)
+- [SKILL.md](https://rogueiq.com/networth-by-age/api/SKILL.md)
+
+## For agents
+
+- [Agents page](https://rogueiq.com/agents/): every endpoint and a config snippet in one place

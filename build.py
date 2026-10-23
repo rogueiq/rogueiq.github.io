@@ -86,7 +86,7 @@ timeline.sort(key=lambda x: x["date"], reverse=True)
 ORG = {"@type": "Organization", "@id": BASE + "/#org", "name": SITE["name"], "url": BASE + "/", "slogan": SITE["tagline"], "description": SITE["description"],
        "sameAs": [SITE["x"], SITE["github"]]}
 
-def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_image=None):
+def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_image=None, canonical=True):
     url = BASE + path
     ld = json.dumps({"@context": "https://schema.org", "@graph": jsonld}, ensure_ascii=False)
     robots = '<meta name="robots" content="noindex">\n' if noindex else ""
@@ -97,7 +97,7 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-{robots}<link rel="canonical" href="{url}">
+{robots}{f'<link rel="canonical" href="{url}">' if canonical else ""}
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="RogueIQ">
 <meta property="og:title" content="{esc(title)}">
@@ -119,14 +119,14 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="/"><span class="mark-wrap"><img class="mark" src="/assets/logo/raven-64.png" alt="" width="32" height="32"><i class="eye" aria-hidden="true"></i></span>Rogue<span>IQ</span></a>
-  <nav aria-label="Main"><a href="/wire/">The Wire</a><a href="/#agents">Agents</a></nav>
+  <nav aria-label="Main"><a href="/wire/">The Wire</a><a href="/agents/">Agents</a></nav>
 </div></header>
 <main id="main" class="wrap">
 {body}
 </main>
 <footer class="wrap foot">
   <p class="disc">{esc(SITE['disclaimer'])}</p>
-  <p><a href="{SITE['x']}">@rogueiq on X</a> · <a href="https://rogueiq.com/wire/">The Wire</a> · <a href="https://rogueiq.com/wire/docs/">Agent docs</a> · <a href="/llms.txt">llms.txt</a></p>
+  <p><a href="{SITE['x']}">@rogueiq on X</a> · <a href="https://rogueiq.com/wire/">The Wire</a> · <a href="/agents/">For agents</a> · <a href="/llms.txt">llms.txt</a></p>
 </footer>
 </body>
 </html>
@@ -209,7 +209,7 @@ cards = "".join(f'<li><a class="card" href="{esc(c["url"])}"><h3>{esc(c["q"])}</
 toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="badge live">{esc(t["status"])}</span><h3>{esc(t["question"])}</h3><p class="preview">{esc(t["preview"])}</p><p class="muted small">{esc(t["name"])} · Web, API and MCP</p></a></li>' for t in SITE["tools"])
 home_charts = [c for c in SITE["charts"] if c.get("home")]
 FEED = "https://rogueiq.com/wire"
-MCP = "https://rogueiq-tools.rogueiq.workers.dev/mcp"
+MCP = "https://rogueiq.com/networth-by-age/mcp"
 SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\n  }\n}'
 home_body = f"""<section class="hero">
   <h1 class="shimmer">Get Smarter About Money.</h1>
@@ -271,10 +271,38 @@ def rfc822(d): return datetime.strptime(d, "%Y-%m-%d").strftime("%a, %d %b %Y 12
 items = "".join(f"<item><title>{esc(p['title'])}</title><link>{BASE}/blog/{p['slug']}/</link><guid>{BASE}/blog/{p['slug']}/</guid><pubDate>{rfc822(p['date'])}</pubDate><description>{esc(p['desc'])}</description></item>" for p in live_posts)
 write("blog/rss.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RogueIQ Blog</title><link>{BASE}/blog/</link><atom:link href="{BASE}/blog/rss.xml" rel="self" type="application/rss+xml"/><description>Plain-language RogueIQ guides built on primary-source public data.</description><language>en-us</language>{items}</channel></rss>\n')
 
+import subprocess
 today = date.today().isoformat()
-urls = [("/", today), ("/wire/", today), ("/wire/docs/", today), ("/networth-by-age/", today)] + [(t["url"], today) for t in SITE["tools"] if t["url"].startswith("/")] + [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
-write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+def lastmod(*paths):
+    """Last real change to the files behind a page: today if uncommitted edits, else the last git commit date."""
+    try:
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", *paths], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        if dirty: return today
+        d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", *paths], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        return d or today
+    except Exception:
+        return today
+NWREPO = ROOT.parent / "networth-by-age"
+def nw_lastmod(repo=NWREPO, *paths):
+    try:
+        d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", *paths], cwd=repo, capture_output=True, text=True).stdout.strip()
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", *paths], cwd=repo, capture_output=True, text=True).stdout.strip()
+        return today if dirty else (d or today)
+    except Exception:
+        return today
+urls = [("/", lastmod("build.py", "content/site.json", "assets/home.js", "assets/style.css")),
+        ("/agents/", lastmod("build.py", "content/site.json")),
+        ("/charts/", lastmod("build.py", "content/site.json", "charts")),
+        ("/wire/docs/", nw_lastmod(ROOT.parent / "newsfeed", "public/docs")),
+        ("/networth-by-age/", nw_lastmod())]
+if live_posts:
+    urls.append(("/blog/", max(p["date"] for p in live_posts)))
+    urls += [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
+write("sitemap-pages.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
+write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+      f"  <sitemap><loc>{BASE}/sitemap-pages.xml</loc><lastmod>{max(d for _, d in urls)}</lastmod></sitemap>\n"
+      f"  <sitemap><loc>{BASE}/wire/sitemap.xml</loc></sitemap>\n</sitemapindex>\n")
 write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
 
 link = lambda u: u if u.startswith("http") else BASE + u
@@ -290,12 +318,54 @@ llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified mon
         "- [Docs](https://rogueiq.com/wire/docs/)",
         "- [Wire llms.txt](https://rogueiq.com/wire/llms.txt)",
         "- [Wire SKILL.md](https://rogueiq.com/wire/SKILL.md)",
-        "\n## Other tools\n",
-        f"- [Net worth by age checker]({SITE['tools'][0]['url']}): calculator using the Federal Reserve Survey of Consumer Finances. API/MCP: {AG['docs']}"]
+        "- [Wire item pages](https://rogueiq.com/wire/sitemap.xml): one page per release at https://rogueiq.com/wire/item/{id}/",
+        "\n## Net worth by age\n",
+        "Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). Free, no auth.\n",
+        "- [Web checker](https://rogueiq.com/networth-by-age/)",
+        f"- [MCP server (streamable HTTP, read-only)]({AG['mcp']}): tool networth_percentile_by_age",
+        "- [JSON API](https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)",
+        f"- [OpenAPI spec]({AG['openapi']})",
+        f"- [llms.txt]({AG['llms']})",
+        f"- [SKILL.md]({AG['skill']})",
+        "\n## For agents\n",
+        "- [Agents page](https://rogueiq.com/agents/): every endpoint and a config snippet in one place"]
 write("llms.txt", "\n".join(llms) + "\n")
 
 print(f"Built: {len(posts)} post(s) ({len(posts)-len(live_posts)} draft), {len(timeline)} log entries" + (" [PREVIEW: drafts included, do not publish]" if PREVIEW else ""))
 
+
+# ---------- agents ----------
+W = "https://rogueiq.com/wire"
+AG_SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + W + '/mcp" },\n    "rogueiq-networth": { "url": "' + AG["mcp"] + '" }\n  }\n}'
+CLI_SNIP = f"claude mcp add --transport http rogueiq-wire {W}/mcp\nclaude mcp add --transport http rogueiq-networth {AG['mcp']}"
+def ag_links(rows): return "<ul class=\"aglist\">" + "".join(f'<li><strong>{esc(k)}</strong> <a href="{esc(v)}"><code>{esc(v)}</code></a></li>' for k, v in rows) + "</ul>"
+agents_body = f"""<section class="hero small"><p class="kicker">For AI agents</p><h1>Connect your AI agent to RogueIQ</h1>
+<p class="lead">Your agent gets official U.S. money releases and a net worth by age calculator, each answer carrying its source, date and disclaimer. Free, read-only, no sign-up or API key.</p></section>
+<section class="agents" id="setup" aria-labelledby="setup-h"><h2 id="setup-h">Quick setup</h2>
+<p class="intro">Add both MCP servers to any client that supports remote MCP over streamable HTTP (Claude, Cursor, ChatGPT connectors and others).</p>
+<div class="snip"><pre class="code"><code id="snip-json">{esc(AG_SNIP)}</code></pre><button type="button" class="copy" data-copy="snip-json">Copy</button></div>
+<p class="intro">Claude Code:</p>
+<div class="snip"><pre class="code"><code id="snip-cli">{esc(CLI_SNIP)}</code></pre><button type="button" class="copy" data-copy="snip-cli">Copy</button></div>
+</section>
+<section class="agents" id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
+<p class="intro">Major releases from the Fed, BLS, BEA, Treasury, OFAC, the SEC, EDGAR 8-Ks, the CFTC, DOJ and Nasdaq halts, as structured data. MCP tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up.</p>
+{ag_links([("MCP server", W + "/mcp"), ("OpenAPI spec", W + "/openapi.json"), ("JSON API", W + "/v1/items?limit=5"), ("SKILL.md", W + "/SKILL.md"), ("llms.txt", W + "/llms.txt"), ("Docs", W + "/docs/")])}
+</section>
+<section class="agents" id="networth" aria-labelledby="nw-h"><h2 id="nw-h">Net worth by age</h2>
+<p class="intro">Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). MCP tool: networth_percentile_by_age.</p>
+{ag_links([("MCP server", AG["mcp"]), ("OpenAPI spec", AG["openapi"]), ("JSON API", "https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&net_worth=150000"), ("SKILL.md", AG["skill"]), ("llms.txt", AG["llms"]), ("Web checker", "https://rogueiq.com/networth-by-age/")])}
+</section>
+<section class="agents" aria-labelledby="rules-h"><h2 id="rules-h">House rules for agents</h2>
+<ul><li>Pass along each answer's source link, date and disclaimer.</li><li>Quote figures as the source states them; check the official release before relying on a number.</li><li>RogueIQ gives information, never buy or sell calls.</li></ul>
+<p class="muted">Site-wide index for agents: <a href="/llms.txt">/llms.txt</a></p>
+</section>
+<script src="/assets/home.js" defer></script>"""
+write("agents/index.html", page("/agents/", "For AI Agents: MCP Servers, API and OpenAPI | RogueIQ",
+      "Connect your AI agent to RogueIQ: free, read-only MCP servers and JSON APIs for official U.S. money releases and net worth by age, with sources and dates on every answer.", agents_body,
+      [ORG, {"@type": "WebPage", "name": "RogueIQ for AI agents", "url": BASE + "/agents/", "publisher": {"@id": BASE + "/#org"}},
+       {"@type": "WebAPI", "name": "The RogueIQ Wire API and MCP server", "url": W + "/", "documentation": W + "/openapi.json", "provider": {"@id": BASE + "/#org"}, "isAccessibleForFree": True},
+       {"@type": "WebAPI", "name": "RogueIQ net worth by age API and MCP server", "url": "https://rogueiq.com/networth-by-age/", "documentation": AG["openapi"], "provider": {"@id": BASE + "/#org"}, "isAccessibleForFree": True}]))
+
 # ---------- 404 ----------
 nf_body = '<section class="hero small"><h1>Page not found</h1><p class="lead">That page doesn\'t exist. Try <a href="/">the homepage</a> or <a href="/wire/">The Wire</a>.</p></section>'
-write("404.html", page("/404.html", "Page not found | RogueIQ", "Page not found.", nf_body, [], noindex=True))
+write("404.html", page("/404.html", "Page not found | RogueIQ", "Page not found.", nf_body, [], noindex=True, canonical=False))

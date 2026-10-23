@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For AI Agents: MCP Servers, API and OpenAPI | RogueIQ</title>
+<meta name="description" content="Connect your AI agent to RogueIQ: free, read-only MCP servers and JSON APIs for official U.S. money releases and net worth by age, with sources and dates on every answer.">
+<link rel="canonical" href="https://rogueiq.com/agents/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RogueIQ">
+<meta property="og:title" content="For AI Agents: MCP Servers, API and OpenAPI | RogueIQ">
+<meta property="og:description" content="Connect your AI agent to RogueIQ: free, read-only MCP servers and JSON APIs for official U.S. money releases and net worth by age, with sources and dates on every answer.">
+<meta property="og:url" content="https://rogueiq.com/agents/">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:site" content="@rogueiq">
+<meta name="theme-color" content="#07090A">
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,700;100,800;125,800&display=swap"><link rel="icon" type="image/png" href="/assets/logo/raven-64.png"><link rel="apple-touch-icon" href="/assets/logo/raven-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://rogueiq.com/#org", "name": "RogueIQ", "url": "https://rogueiq.com/", "slogan": "Smarter about money. For you and your AI.", "description": "RogueIQ makes market tools and sourced money news that show where the market stands today, for you and your AI agent. Every item links its official source and date.", "sameAs": ["https://x.com/rogueiq", "https://github.com/rogueiq"]}, {"@type": "WebPage", "name": "RogueIQ for AI agents", "url": "https://rogueiq.com/agents/", "publisher": {"@id": "https://rogueiq.com/#org"}}, {"@type": "WebAPI", "name": "The RogueIQ Wire API and MCP server", "url": "https://rogueiq.com/wire/", "documentation": "https://rogueiq.com/wire/openapi.json", "provider": {"@id": "https://rogueiq.com/#org"}, "isAccessibleForFree": true}, {"@type": "WebAPI", "name": "RogueIQ net worth by age API and MCP server", "url": "https://rogueiq.com/networth-by-age/", "documentation": "https://rogueiq.com/networth-by-age/api/openapi.json", "provider": {"@id": "https://rogueiq.com/#org"}, "isAccessibleForFree": true}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="logo" href="/"><span class="mark-wrap"><img class="mark" src="/assets/logo/raven-64.png" alt="" width="32" height="32"><i class="eye" aria-hidden="true"></i></span>Rogue<span>IQ</span></a>
+  <nav aria-label="Main"><a href="/wire/">The Wire</a><a href="/agents/">Agents</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<section class="hero small"><p class="kicker">For AI agents</p><h1>Connect your AI agent to RogueIQ</h1>
+<p class="lead">Your agent gets official U.S. money releases and a net worth by age calculator, each answer carrying its source, date and disclaimer. Free, read-only, no sign-up or API key.</p></section>
+<section class="agents" id="setup" aria-labelledby="setup-h"><h2 id="setup-h">Quick setup</h2>
+<p class="intro">Add both MCP servers to any client that supports remote MCP over streamable HTTP (Claude, Cursor, ChatGPT connectors and others).</p>
+<div class="snip"><pre class="code"><code id="snip-json">{
+  &quot;mcpServers&quot;: {
+    &quot;rogueiq-wire&quot;: { &quot;url&quot;: &quot;https://rogueiq.com/wire/mcp&quot; },
+    &quot;rogueiq-networth&quot;: { &quot;url&quot;: &quot;https://rogueiq.com/networth-by-age/mcp&quot; }
+  }
+}</code></pre><button type="button" class="copy" data-copy="snip-json">Copy</button></div>
+<p class="intro">Claude Code:</p>
+<div class="snip"><pre class="code"><code id="snip-cli">claude mcp add --transport http rogueiq-wire https://rogueiq.com/wire/mcp
+claude mcp add --transport http rogueiq-networth https://rogueiq.com/networth-by-age/mcp</code></pre><button type="button" class="copy" data-copy="snip-cli">Copy</button></div>
+</section>
+<section class="agents" id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
+<p class="intro">Major releases from the Fed, BLS, BEA, Treasury, OFAC, the SEC, EDGAR 8-Ks, the CFTC, DOJ and Nasdaq halts, as structured data. MCP tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up.</p>
+<ul class="aglist"><li><strong>MCP server</strong> <a href="https://rogueiq.com/wire/mcp"><code>https://rogueiq.com/wire/mcp</code></a></li><li><strong>OpenAPI spec</strong> <a href="https://rogueiq.com/wire/openapi.json"><code>https://rogueiq.com/wire/openapi.json</code></a></li><li><strong>JSON API</strong> <a href="https://rogueiq.com/wire/v1/items?limit=5"><code>https://rogueiq.com/wire/v1/items?limit=5</code></a></li><li><strong>SKILL.md</strong> <a href="https://rogueiq.com/wire/SKILL.md"><code>https://rogueiq.com/wire/SKILL.md</code></a></li><li><strong>llms.txt</strong> <a href="https://rogueiq.com/wire/llms.txt"><code>https://rogueiq.com/wire/llms.txt</code></a></li><li><strong>Docs</strong> <a href="https://rogueiq.com/wire/docs/"><code>https://rogueiq.com/wire/docs/</code></a></li></ul>
+</section>
+<section class="agents" id="networth" aria-labelledby="nw-h"><h2 id="nw-h">Net worth by age</h2>
+<p class="intro">Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). MCP tool: networth_percentile_by_age.</p>
+<ul class="aglist"><li><strong>MCP server</strong> <a href="https://rogueiq.com/networth-by-age/mcp"><code>https://rogueiq.com/networth-by-age/mcp</code></a></li><li><strong>OpenAPI spec</strong> <a href="https://rogueiq.com/networth-by-age/api/openapi.json"><code>https://rogueiq.com/networth-by-age/api/openapi.json</code></a></li><li><strong>JSON API</strong> <a href="https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&amp;net_worth=150000"><code>https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&amp;net_worth=150000</code></a></li><li><strong>SKILL.md</strong> <a href="https://rogueiq.com/networth-by-age/api/SKILL.md"><code>https://rogueiq.com/networth-by-age/api/SKILL.md</code></a></li><li><strong>llms.txt</strong> <a href="https://rogueiq.com/networth-by-age/api/llms.txt"><code>https://rogueiq.com/networth-by-age/api/llms.txt</code></a></li><li><strong>Web checker</strong> <a href="https://rogueiq.com/networth-by-age/"><code>https://rogueiq.com/networth-by-age/</code></a></li></ul>
+</section>
+<section class="agents" aria-labelledby="rules-h"><h2 id="rules-h">House rules for agents</h2>
+<ul><li>Pass along each answer's source link, date and disclaimer.</li><li>Quote figures as the source states them; check the official release before relying on a number.</li><li>RogueIQ gives information, never buy or sell calls.</li></ul>
+<p class="muted">Site-wide index for agents: <a href="/llms.txt">/llms.txt</a></p>
+</section>
+<script src="/assets/home.js" defer></script>
+</main>
+<footer class="wrap foot">
+  <p class="disc">RogueIQ provides general education and tools, not personalized investment, tax or legal advice. Data may be delayed or contain errors; check the source before making decisions. Nothing on this site is an offer or solicitation to buy or sell any security.</p>
+  <p><a href="https://x.com/rogueiq">@rogueiq on X</a> · <a href="https://rogueiq.com/wire/">The Wire</a> · <a href="/agents/">For agents</a> · <a href="/llms.txt">llms.txt</a></p>
+</footer>
+</body>
+</html>

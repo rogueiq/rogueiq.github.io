@@ -10,7 +10,7 @@
   "github": "https://github.com/rogueiq",
   "hook": {
     "label": "How does your net worth compare at your age?",
-    "url": "https://rogueiq.github.io/networth-by-age/",
+    "url": "/networth-by-age/",
     "note": "Free and private. Runs in your browser. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available)."
   },
   "waitlist": {
@@ -25,8 +25,8 @@
       "name": "Net Worth by Age Checker",
       "question": "How does my net worth compare at my age?",
       "status": "Live",
-      "url": "https://rogueiq.github.io/networth-by-age/",
-      "api": "https://rogueiq-tools.rogueiq.workers.dev/v1/networth-by-age",
+      "url": "/networth-by-age/",
+      "api": "https://rogueiq.com/networth-by-age/api/v1/networth-by-age",
       "preview": "Age 34 with $150K: higher than about 75% of families under 35.",
       "summary": "See how your net worth compares with US families your age. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available)."
     }
@@ -76,12 +76,12 @@
     }
   ],
   "agents": {
-    "docs": "https://rogueiq-tools.rogueiq.workers.dev/docs",
-    "mcp_docs": "https://rogueiq-tools.rogueiq.workers.dev/docs#mcp",
-    "mcp": "https://rogueiq-tools.rogueiq.workers.dev/mcp",
-    "llms": "https://rogueiq-tools.rogueiq.workers.dev/llms.txt",
-    "openapi": "https://rogueiq-tools.rogueiq.workers.dev/openapi.json",
-    "skill": "https://rogueiq-tools.rogueiq.workers.dev/SKILL.md"
+    "docs": "https://rogueiq.com/agents/",
+    "mcp_docs": "https://rogueiq.com/agents/#networth",
+    "mcp": "https://rogueiq.com/networth-by-age/mcp",
+    "llms": "https://rogueiq.com/networth-by-age/api/llms.txt",
+    "openapi": "https://rogueiq.com/networth-by-age/api/openapi.json",
+    "skill": "https://rogueiq.com/networth-by-age/api/SKILL.md"
   },
   "start": {
     "title": "Start here",
@@ -90,7 +90,7 @@
       {
         "q": "How do your savings compare with people your age?",
         "a": "See what families your age have. Data: Federal Reserve Survey of Consumer Finances, 2025 (latest available).",
-        "url": "https://rogueiq.github.io/networth-by-age/"
+        "url": "/networth-by-age/"
       }
     ]
   },
