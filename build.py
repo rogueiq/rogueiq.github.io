@@ -295,3 +295,7 @@ llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified mon
 write("llms.txt", "\n".join(llms) + "\n")
 
 print(f"Built: {len(posts)} post(s) ({len(posts)-len(live_posts)} draft), {len(timeline)} log entries" + (" [PREVIEW: drafts included, do not publish]" if PREVIEW else ""))
+
+# ---------- 404 ----------
+nf_body = '<section class="hero small"><h1>Page not found</h1><p class="lead">That page doesn\'t exist. Try <a href="/">the homepage</a> or <a href="/wire/">The Wire</a>.</p></section>'
+write("404.html", page("/404.html", "Page not found | RogueIQ", "Page not found.", nf_body, [], noindex=True))
