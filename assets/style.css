@@ -149,3 +149,7 @@ input.slider{border:0 !important;background:transparent !important;padding:0 !im
 .email input{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font:inherit;font-size:15px}
 .email button{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:10px 16px;font-weight:600;cursor:pointer}
 .post-date{font-size:13px}
+
+.logo .mark{width:32px;height:32px;display:inline-block;vertical-align:middle;margin:-4px 8px 0 0}
+.hero{position:relative}.hero::after{content:"";position:absolute;right:-40px;top:10px;width:420px;height:420px;background:url(/assets/logo/raven.png) center/contain no-repeat;opacity:.07;pointer-events:none;z-index:-1}@media(max-width:700px){.hero::after{display:none}}
+.hero.small::after{display:none}
