@@ -154,3 +154,6 @@ input.slider{border:0 !important;background:transparent !important;padding:0 !im
 .hero{position:relative}.hero::after{content:"";position:absolute;right:-40px;top:10px;width:420px;height:420px;background:url(/assets/logo/raven.png) center/contain no-repeat;opacity:.07;pointer-events:none;z-index:-1}@media(max-width:700px){.hero::after{display:none}}
 .hero.small::after{display:none}
 .logo{font-family:'Archivo',Inter,sans-serif;font-stretch:125%;font-weight:800;letter-spacing:-.005em}
+h1,h2,h3{font-family:'Archivo',Inter,sans-serif;font-stretch:100%}
+h1{font-weight:800;letter-spacing:-.03em}
+h3{font-weight:700;letter-spacing:-.015em}h2{font-weight:700}
