@@ -108,7 +108,7 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <meta name="twitter:site" content="@rogueiq">
 <meta name="theme-color" content="#07090A">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
-<link rel="icon" type="image/png" href="/assets/logo/raven-64.png"><link rel="apple-touch-icon" href="/assets/logo/raven-180.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&display=swap"><link rel="icon" type="image/png" href="/assets/logo/raven-64.png"><link rel="apple-touch-icon" href="/assets/logo/raven-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
