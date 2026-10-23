@@ -291,6 +291,7 @@ def nw_lastmod(repo=NWREPO, *paths):
     except Exception:
         return today
 urls = [("/", lastmod("build.py", "content/site.json", "assets/home.js", "assets/style.css")),
+        ("/wire/", today),
         ("/agents/", lastmod("build.py", "content/site.json")),
         ("/charts/", lastmod("build.py", "content/site.json", "charts")),
         ("/wire/docs/", nw_lastmod(ROOT.parent / "newsfeed", "public/docs")),
