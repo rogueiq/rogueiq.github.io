@@ -209,7 +209,7 @@ cards = "".join(f'<li><a class="card" href="{esc(c["url"])}"><h3>{esc(c["q"])}</
 toolcards = "".join(f'<li><a class="card" href="{esc(t["url"])}"><span class="badge live">{esc(t["status"])}</span><h3>{esc(t["question"])}</h3><p class="preview">{esc(t["preview"])}</p><p class="muted small">{esc(t["name"])} · Web, API and MCP</p></a></li>' for t in SITE["tools"])
 home_charts = [c for c in SITE["charts"] if c.get("home")]
 FEED = "https://rogueiq.com/wire"
-MCP = "https://rogueiq.com/networth-by-age/mcp"
+MCP = "https://rogueiq.com/net-worth-by-age/mcp"
 SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\n  }\n}'
 home_body = f"""<section class="hero">
   <h1 class="shimmer">Get Smarter About Money.</h1>
@@ -295,7 +295,7 @@ urls = [("/", lastmod("build.py", "content/site.json", "assets/home.js", "assets
         ("/agents/", lastmod("build.py", "content/site.json")),
         ("/charts/", lastmod("build.py", "content/site.json", "charts")),
         ("/wire/docs/", nw_lastmod(ROOT.parent / "newsfeed", "public/docs")),
-        ("/networth-by-age/", nw_lastmod())]
+        ("/net-worth-by-age/", nw_lastmod())]
 if live_posts:
     urls.append(("/blog/", max(p["date"] for p in live_posts)))
     urls += [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
@@ -322,9 +322,9 @@ llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified mon
         "- [Wire item pages](https://rogueiq.com/wire/sitemap.xml): one page per release at https://rogueiq.com/wire/item/{id}/",
         "\n## Net worth by age\n",
         "Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). Free, no auth.\n",
-        "- [Web checker](https://rogueiq.com/networth-by-age/)",
+        "- [Web checker](https://rogueiq.com/net-worth-by-age/)",
         f"- [MCP server (streamable HTTP, read-only)]({AG['mcp']}): tool networth_percentile_by_age",
-        "- [JSON API](https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)",
+        "- [JSON API](https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)",
         f"- [OpenAPI spec]({AG['openapi']})",
         f"- [llms.txt]({AG['llms']})",
         f"- [SKILL.md]({AG['skill']})",
@@ -354,7 +354,7 @@ agents_body = f"""<section class="hero small"><p class="kicker">For AI agents</p
 </section>
 <section class="agents" id="networth" aria-labelledby="nw-h"><h2 id="nw-h">Net worth by age</h2>
 <p class="intro">Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). MCP tool: networth_percentile_by_age.</p>
-{ag_links([("MCP server", AG["mcp"]), ("OpenAPI spec", AG["openapi"]), ("JSON API", "https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&net_worth=150000"), ("SKILL.md", AG["skill"]), ("llms.txt", AG["llms"]), ("Web checker", "https://rogueiq.com/networth-by-age/")])}
+{ag_links([("MCP server", AG["mcp"]), ("OpenAPI spec", AG["openapi"]), ("JSON API", "https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=34&net_worth=150000"), ("SKILL.md", AG["skill"]), ("llms.txt", AG["llms"]), ("Web checker", "https://rogueiq.com/net-worth-by-age/")])}
 </section>
 <section class="agents" aria-labelledby="rules-h"><h2 id="rules-h">House rules for agents</h2>
 <ul><li>Pass along each answer's source link, date and disclaimer.</li><li>Quote figures as the source states them; check the official release before relying on a number.</li><li>RogueIQ gives information, never buy or sell calls.</li></ul>
@@ -365,7 +365,7 @@ write("agents/index.html", page("/agents/", "For AI Agents: MCP Servers, API and
       "Connect your AI agent to RogueIQ: free, read-only MCP servers and JSON APIs for official U.S. money releases and net worth by age, with sources and dates on every answer.", agents_body,
       [ORG, {"@type": "WebPage", "name": "RogueIQ for AI agents", "url": BASE + "/agents/", "publisher": {"@id": BASE + "/#org"}},
        {"@type": "WebAPI", "name": "The RogueIQ Wire API and MCP server", "url": W + "/", "documentation": W + "/openapi.json", "provider": {"@id": BASE + "/#org"}, "isAccessibleForFree": True},
-       {"@type": "WebAPI", "name": "RogueIQ net worth by age API and MCP server", "url": "https://rogueiq.com/networth-by-age/", "documentation": AG["openapi"], "provider": {"@id": BASE + "/#org"}, "isAccessibleForFree": True}]))
+       {"@type": "WebAPI", "name": "RogueIQ net worth by age API and MCP server", "url": "https://rogueiq.com/net-worth-by-age/", "documentation": AG["openapi"], "provider": {"@id": BASE + "/#org"}, "isAccessibleForFree": True}]))
 
 # ---------- 404 ----------
 nf_body = '<section class="hero small"><h1>Page not found</h1><p class="lead">That page doesn\'t exist. Try <a href="/">the homepage</a> or <a href="/wire/">The Wire</a>.</p></section>'

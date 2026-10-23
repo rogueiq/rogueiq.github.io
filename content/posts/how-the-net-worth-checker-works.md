@@ -6,7 +6,7 @@ draft: true
 ---
 <!-- SAMPLE / DRAFT POST. Alan: review this, then change "draft: true" to "draft: false" above to publish. -->
 
-The [Net Worth by Age Checker](/networth-by-age/) answers one question: how does your net worth compare with US families your age?
+The [Net Worth by Age Checker](/net-worth-by-age/) answers one question: how does your net worth compare with US families your age?
 
 ## Where the numbers come from
 

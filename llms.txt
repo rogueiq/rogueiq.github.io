@@ -21,12 +21,12 @@ Major releases from U.S. government agencies and official sources (Fed, BLS, BEA
 
 Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). Free, no auth.
 
-- [Web checker](https://rogueiq.com/networth-by-age/)
-- [MCP server (streamable HTTP, read-only)](https://rogueiq.com/networth-by-age/mcp): tool networth_percentile_by_age
-- [JSON API](https://rogueiq.com/networth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)
-- [OpenAPI spec](https://rogueiq.com/networth-by-age/api/openapi.json)
-- [llms.txt](https://rogueiq.com/networth-by-age/api/llms.txt)
-- [SKILL.md](https://rogueiq.com/networth-by-age/api/SKILL.md)
+- [Web checker](https://rogueiq.com/net-worth-by-age/)
+- [MCP server (streamable HTTP, read-only)](https://rogueiq.com/net-worth-by-age/mcp): tool networth_percentile_by_age
+- [JSON API](https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)
+- [OpenAPI spec](https://rogueiq.com/net-worth-by-age/api/openapi.json)
+- [llms.txt](https://rogueiq.com/net-worth-by-age/api/llms.txt)
+- [SKILL.md](https://rogueiq.com/net-worth-by-age/api/SKILL.md)
 
 ## For agents
 
