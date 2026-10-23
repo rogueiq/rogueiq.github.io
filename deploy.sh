@@ -8,4 +8,5 @@ rm -rf dist && mkdir -p dist/net-worth-by-age
 cp -r index.html 404.html assets blog charts agents llms.txt robots.txt sitemap.xml sitemap-pages.xml dist/
 for f in index.html app.js data.js style.css raven-64.png networth-by-age-2025.csv under-35 35-44 45-54 55-64 65-74 75-and-older; do cp -r ../networth-by-age/$f dist/net-worth-by-age/; done
 sed -i 's#https://rogueiq.github.io/networth-by-age/#https://rogueiq.com/net-worth-by-age/#g; s#https://rogueiq.github.io/#https://rogueiq.com/#g' dist/net-worth-by-age/index.html
+cp assets/logo/favicon.ico dist/favicon.ico
 env -u CLOUDFLARE_API_TOKEN npx -y wrangler@4.86.0 deploy "$@"
