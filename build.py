@@ -214,7 +214,7 @@ SNIP = '{\n  "mcpServers": {\n    "rogueiq-wire": { "url": "' + FEED + '/mcp" }\
 home_body = f"""<section class="hero">
   <h1 class="shimmer">Get Smarter About Money.</h1>
   <p class="lead">Nobody can predict the markets. But our tools show you verified data on where the market stands today, so you can make your next move with more confidence. Built for you and your AI agents.</p>
-  <p class="cta"><a class="btn ember" href="https://x.com/rogueiq">Follow on X</a><a class="btn ghost" href="#agents">Connect your agent</a></p>
+  <p class="cta"><a class="btn ember" href="https://x.com/rogueiq">Follow on X</a><a class="btn ghost" href="#agents">Connect your agent</a><a class="btn ghost" href="/net-worth-by-age/">Check your net worth by age</a></p>
 </section>
 <section id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
   <p class="big">Market-moving releases, from the source.</p>
@@ -295,7 +295,7 @@ urls = [("/", lastmod("build.py", "content/site.json", "assets/home.js", "assets
         ("/agents/", lastmod("build.py", "content/site.json")),
         ("/charts/", lastmod("build.py", "content/site.json", "charts")),
         ("/wire/docs/", nw_lastmod(ROOT.parent / "newsfeed", "public/docs")),
-        ("/net-worth-by-age/", nw_lastmod())]
+        ("/net-worth-by-age/", nw_lastmod())] + [(f"/net-worth-by-age/{s}/", nw_lastmod()) for s in ("under-35", "35-44", "45-54", "55-64", "65-74", "75-and-older")]
 if live_posts:
     urls.append(("/blog/", max(p["date"] for p in live_posts)))
     urls += [(f"/blog/{p['slug']}/", p["date"]) for p in live_posts]
@@ -320,14 +320,13 @@ llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified mon
         "- [Wire llms.txt](https://rogueiq.com/wire/llms.txt)",
         "- [Wire SKILL.md](https://rogueiq.com/wire/SKILL.md)",
         "- [Wire item pages](https://rogueiq.com/wire/sitemap.xml): one page per release at https://rogueiq.com/wire/item/{id}/",
-        "\n## Net worth by age\n",
+        "\n## Net worth by age (2025 SCF)\n",
         "Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). Free, no auth.\n",
-        "- [Web checker](https://rogueiq.com/net-worth-by-age/)",
-        f"- [MCP server (streamable HTTP, read-only)]({AG['mcp']}): tool networth_percentile_by_age",
-        "- [JSON API](https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=34&net_worth=150000)",
-        f"- [OpenAPI spec]({AG['openapi']})",
-        f"- [llms.txt]({AG['llms']})",
-        f"- [SKILL.md]({AG['skill']})",
+        "- [Calculator and tables](https://rogueiq.com/net-worth-by-age/): median/mean by age (Fed report Table 2) + RogueIQ-computed percentiles, 2025 dollars",
+        f"- [MCP (streamable HTTP)]({AG['mcp']}): tool networth_percentile_by_age",
+        f"- [API](https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=35&net_worth=150000) · [OpenAPI]({AG['openapi']}) · [CSV](https://rogueiq.com/net-worth-by-age/networth-by-age-2025.csv)",
+        "- Per-age pages: " + ", ".join(f"[{n}](https://rogueiq.com/net-worth-by-age/{s}/)" for n, s in (("Under 35", "under-35"), ("35-44", "35-44"), ("45-54", "45-54"), ("55-64", "55-64"), ("65-74", "65-74"), ("75+", "75-and-older"))),
+        f"- [llms.txt]({AG['llms']}) · [SKILL.md]({AG['skill']})",
         "\n## For agents\n",
         "- [Agents page](https://rogueiq.com/agents/): every endpoint and a config snippet in one place"]
 write("llms.txt", "\n".join(llms) + "\n")
@@ -353,7 +352,7 @@ agents_body = f"""<section class="hero small"><p class="kicker">For AI agents</p
 {ag_links([("MCP server", W + "/mcp"), ("OpenAPI spec", W + "/openapi.json"), ("JSON API", W + "/v1/items?limit=5"), ("SKILL.md", W + "/SKILL.md"), ("llms.txt", W + "/llms.txt"), ("Docs", W + "/docs/")])}
 </section>
 <section class="agents" id="networth" aria-labelledby="nw-h"><h2 id="nw-h">Net worth by age</h2>
-<p class="intro">Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). MCP tool: networth_percentile_by_age.</p>
+<p class="intro">Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). MCP tool: networth_percentile_by_age. <a href="/net-worth-by-age/">Net worth by age tables and calculator</a>.</p>
 {ag_links([("MCP server", AG["mcp"]), ("OpenAPI spec", AG["openapi"]), ("JSON API", "https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=34&net_worth=150000"), ("SKILL.md", AG["skill"]), ("llms.txt", AG["llms"]), ("Web checker", "https://rogueiq.com/net-worth-by-age/")])}
 </section>
 <section class="agents" aria-labelledby="rules-h"><h2 id="rules-h">House rules for agents</h2>
