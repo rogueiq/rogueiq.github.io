@@ -27,6 +27,14 @@ Where a net worth ranks among U.S. families of the same age, from the Federal Re
 - Per-age pages: [Under 35](https://rogueiq.com/net-worth-by-age/under-35/), [35-44](https://rogueiq.com/net-worth-by-age/35-44/), [45-54](https://rogueiq.com/net-worth-by-age/45-54/), [55-64](https://rogueiq.com/net-worth-by-age/55-64/), [65-74](https://rogueiq.com/net-worth-by-age/65-74/), [75+](https://rogueiq.com/net-worth-by-age/75-and-older/)
 - [llms.txt](https://rogueiq.com/net-worth-by-age/api/llms.txt) · [SKILL.md](https://rogueiq.com/net-worth-by-age/api/SKILL.md)
 
+## Market pulse (end of day, weekly trend)
+
+End-of-day 10Y and 2Y Treasury par yields, the 10s-2s spread, EIA Brent spot and the Fed broad dollar index (H.10), each with 1-week and 1-month change, as-of date and official source. Descriptive weekly read; no forecasts or advice.
+
+- [Market pulse page](https://rogueiq.com/market-pulse/)
+- [JSON API](https://rogueiq.com/market-pulse/api/v1/pulse) · [OpenAPI](https://rogueiq.com/market-pulse/api/openapi.json) · [CSV](https://rogueiq.com/market-pulse/pulse-latest.csv)
+- MCP: tool get_market_pulse on https://rogueiq.com/wire/mcp
+
 ## For agents
 
 - [Agents page](https://rogueiq.com/agents/): every endpoint and a config snippet in one place

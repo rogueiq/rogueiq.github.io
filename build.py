@@ -119,7 +119,7 @@ def page(path, title, desc, body, jsonld, og_type="website", noindex=False, og_i
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="logo" href="/"><span class="mark-wrap"><img class="mark" src="/assets/logo/raven-64.png" alt="" width="32" height="32"><i class="eye" aria-hidden="true"></i></span>Rogue<span>IQ</span></a>
-  <nav aria-label="Main"><a href="/wire/">The Wire</a><a href="/net-worth-by-age/">Net worth by age</a><a href="/agents/">Agents</a></nav>
+  <nav aria-label="Main"><a href="/wire/">The Wire</a><a href="/market-pulse/">Market pulse</a><a href="/net-worth-by-age/">Net worth by age</a><a href="/agents/">Agents</a></nav>
 </div></header>
 <main id="main" class="wrap">
 {body}
@@ -291,6 +291,7 @@ def nw_lastmod(repo=NWREPO, *paths):
     except Exception:
         return today
 urls = [("/", lastmod("build.py", "content/site.json", "assets/home.js", "assets/style.css")),
+        ("/market-pulse/", today),
         ("/wire/", today),
         ("/agents/", lastmod("build.py", "content/site.json")),
         ("/charts/", lastmod("build.py", "content/site.json", "charts")),
@@ -327,6 +328,11 @@ llms = ["# RogueIQ\n", "> Get Smarter About Money. Market tools and verified mon
         f"- [API](https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=35&net_worth=150000) · [OpenAPI]({AG['openapi']}) · [CSV](https://rogueiq.com/net-worth-by-age/networth-by-age-2025.csv)",
         "- Per-age pages: " + ", ".join(f"[{n}](https://rogueiq.com/net-worth-by-age/{s}/)" for n, s in (("Under 35", "under-35"), ("35-44", "35-44"), ("45-54", "45-54"), ("55-64", "55-64"), ("65-74", "65-74"), ("75+", "75-and-older"))),
         f"- [llms.txt]({AG['llms']}) · [SKILL.md]({AG['skill']})",
+        "\n## Market pulse (end of day, weekly trend)\n",
+        "End-of-day 10Y and 2Y Treasury par yields, the 10s-2s spread, EIA Brent spot and the Fed broad dollar index (H.10), each with 1-week and 1-month change, as-of date and official source. Descriptive weekly read; no forecasts or advice.\n",
+        "- [Market pulse page](https://rogueiq.com/market-pulse/)",
+        "- [JSON API](https://rogueiq.com/market-pulse/api/v1/pulse) · [OpenAPI](https://rogueiq.com/market-pulse/api/openapi.json) · [CSV](https://rogueiq.com/market-pulse/pulse-latest.csv)",
+        "- MCP: tool get_market_pulse on https://rogueiq.com/wire/mcp",
         "\n## For agents\n",
         "- [Agents page](https://rogueiq.com/agents/): every endpoint and a config snippet in one place"]
 write("llms.txt", "\n".join(llms) + "\n")
@@ -348,8 +354,12 @@ agents_body = f"""<section class="hero small"><p class="kicker">For AI agents</p
 <div class="snip"><pre class="code"><code id="snip-cli">{esc(CLI_SNIP)}</code></pre><button type="button" class="copy" data-copy="snip-cli">Copy</button></div>
 </section>
 <section class="agents" id="wire" aria-labelledby="wire-h"><h2 id="wire-h">The RogueIQ Wire</h2>
-<p class="intro">Major releases from the Fed, BLS, BEA, Treasury, OFAC, the SEC, EDGAR 8-Ks, the CFTC, DOJ and Nasdaq halts, as structured data. MCP tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up.</p>
+<p class="intro">Major releases from the Fed, BLS, BEA, Treasury, OFAC, the SEC, EDGAR 8-Ks, the CFTC, DOJ and Nasdaq halts, as structured data. MCP tools: list_items, get_item, get_breakdown, get_calendar, get_heads_up, get_market_pulse.</p>
 {ag_links([("MCP server", W + "/mcp"), ("OpenAPI spec", W + "/openapi.json"), ("JSON API", W + "/v1/items?limit=5"), ("SKILL.md", W + "/SKILL.md"), ("llms.txt", W + "/llms.txt"), ("Docs", W + "/docs/")])}
+</section>
+<section class="agents" id="pulse" aria-labelledby="mp-h"><h2 id="mp-h">Market pulse</h2>
+<p class="intro">End-of-day 10-year and 2-year Treasury yields, the 10s–2s spread, EIA Brent and the Fed broad dollar index, each with 1-week and 1-month change, as-of date and official source, plus a descriptive weekly read. MCP tool on the Wire server: get_market_pulse (optional date). <a href="/market-pulse/">Market pulse page</a>.</p>
+{ag_links([("MCP server (tool get_market_pulse)", W + "/mcp"), ("JSON API", "https://rogueiq.com/market-pulse/api/v1/pulse"), ("OpenAPI spec", "https://rogueiq.com/market-pulse/api/openapi.json"), ("CSV", "https://rogueiq.com/market-pulse/pulse-latest.csv"), ("Page", "https://rogueiq.com/market-pulse/")])}
 </section>
 <section class="agents" id="networth" aria-labelledby="nw-h"><h2 id="nw-h">Net worth by age</h2>
 <p class="intro">Where a net worth ranks among U.S. families of the same age, from the Federal Reserve's 2025 Survey of Consumer Finances (2025 dollars). MCP tool: networth_percentile_by_age. <a href="/net-worth-by-age/">Net worth by age tables and calculator</a>.</p>

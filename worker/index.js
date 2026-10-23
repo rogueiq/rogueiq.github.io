@@ -6,9 +6,18 @@ const NW = "/net-worth-by-age";
 const OLD = "/networth-by-age";
 export default {
   async fetch(req, env) {
+    const res = await route(req, env);
+    if (env.PREVIEW !== "1") return res;
+    const h = new Headers(res.headers); h.set("X-Robots-Tag", "noindex, nofollow");
+    return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h });
+  },
+};
+async function route(req, env) {
+  {
     const url = new URL(req.url);
-    if (url.protocol === "http:" || url.hostname === "www.rogueiq.com") return Response.redirect(`https://rogueiq.com${url.pathname}${url.search}`, 301);
+    if (env.PREVIEW !== "1" && (url.protocol === "http:" || url.hostname === "www.rogueiq.com")) return Response.redirect(`https://rogueiq.com${url.pathname}${url.search}`, 301);
     if (url.pathname === "/wire" || url.pathname.startsWith("/wire/")) return env.FEED.fetch(req);
+    if (url.pathname === "/market-pulse" || url.pathname.startsWith("/market-pulse/")) return env.FEED.fetch(req);
     let p = url.pathname;
     if (p === OLD || p.startsWith(OLD + "/")) {
       const rest = p.slice(OLD.length);
@@ -20,8 +29,8 @@ export default {
     if (p === `${NW}/api` || p === `${NW}/api/` || p === `${NW}/api/docs`) return Response.redirect("https://rogueiq.com/agents/#networth", 301);
     if (p.startsWith(`${NW}/api/`)) return tools(req, env, p.slice(`${NW}/api`.length));
     return env.ASSETS.fetch(req);
-  },
-};
+  }
+}
 function tools(req, env, path) {
   const u = new URL(req.url); u.pathname = path;
   return env.TOOLS.fetch(new Request(u.toString(), req));
